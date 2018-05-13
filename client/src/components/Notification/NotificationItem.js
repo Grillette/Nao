@@ -8,6 +8,7 @@ class NotificationItem extends React.Component {
     let icon = '';
     switch (this.props.data.type) {
       case 'negative':
+        setTimeout(() => this.props.handleClose(this.props.data), 8000);
         icon = 'minus circle';
         break;
       case 'positive':
@@ -15,7 +16,7 @@ class NotificationItem extends React.Component {
         icon = 'check circle';
         break;
       case 'warning':
-        setTimeout(() => this.props.handleClose(this.props.data), 10000);
+        setTimeout(() => this.props.handleClose(this.props.data), 8000);
         icon = 'warning circle';
         break;
       case 'info':
