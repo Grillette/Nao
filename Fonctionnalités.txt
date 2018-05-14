@@ -1,10 +1,15 @@
 Fonctionnalités opérationnelles : 
 
-    • Contrôles pas à pas (Déplacement corps, déplacement tête, mode rasta et parlotte)
+    • Contrôles front-end (pas à pas, Déplacement corps, déplacement tête, mode rasta et parlotte)
     • Panneau admin
     • Gestion des robots (admin)
     • Visualisation des actions
-    • 
+    • Ajout/Modification utilisateur
+    • Ajout/Modification robot
+    • Ajout/Modification action
+    • Ajout/Modification périphérique
+    • Déconnexion
+
 
 
 Fonctionnalités non opérationnelles : 
@@ -13,7 +18,23 @@ Fonctionnalités non opérationnelles :
     • Bouton “Doc”
     • Page “Info” vide
     • Fonction “Se souvenir de moi” sur la page de connexion
-    • Je pense que le robot “paulo” n’est pas vraiment configuré 
-    • Ajout d’une action en dur dans le code 
     • Bouton “Retour” lors de la confirmation de suppression (pour la suppression d’un compte)
-    • Liste des utilisateurs fonctionne bizarrement (on ne voit pas le compte avec lequel on est co)
+    • Impossibilité de savoir avec quel utilisateur nous sommes connecté
+
+
+    
+Bugs :
+    • Ne marche pas sur les raspberry
+    • Ajout d'une action (Actions actuellement codés en dur)
+    • Robot “paulo” ne marche pas
+    • Mauvaises redirection de page
+    • Notifications redondantes
+
+
+
+Fonctionnalités à ajouter :
+    • Manuel d'installation
+    • Script d'installation
+    • Manuel d'utilisation
+    • Ajout d'une frise des tâches
+    • Ajout possibilité de terminer une tâche
