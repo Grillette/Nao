@@ -1,0 +1,19 @@
+Fonctionnalités opérationnelles : 
+
+    • Contrôles pas à pas (Déplacement corps, déplacement tête, mode rasta et parlotte)
+    • Panneau admin
+    • Gestion des robots (admin)
+    • Visualisation des actions
+    • 
+
+
+Fonctionnalités non opérationnelles : 
+
+    • Bouton “Home”
+    • Bouton “Doc”
+    • Page “Info” vide
+    • Fonction “Se souvenir de moi” sur la page de connexion
+    • Je pense que le robot “paulo” n’est pas vraiment configuré 
+    • Ajout d’une action en dur dans le code 
+    • Bouton “Retour” lors de la confirmation de suppression (pour la suppression d’un compte)
+    • Liste des utilisateurs fonctionne bizarrement (on ne voit pas le compte avec lequel on est co)
