@@ -3,14 +3,50 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Container } from 'semantic-ui-react';
+import { Container, Header, Table } from 'semantic-ui-react';
+import getRobotDefault from "../../selectors/getRobotDefault";
 
 class Home extends Component {
-  
+
   render() {
+
+    const columns = [
+      {
+        header: 'NOM LOGIQUE DU CAPTEUR',
+        accessor: 'name',
+        minWidth: 80
+      }, {
+        minWidth: 80,
+        header: 'LIBELLE DU CAPTEUR',
+        accessor: 'libelle'
+      }, {
+        minWidth: 80,
+        header: 'VALEUR',
+        accessor: 'value'
+      }, {
+        minWidth: 80,
+        header: 'SEUIL D\'ALERTE',
+        accessor: 'alert',
+      }
+    ];
+
     return (
-      <Container fluid>
-        // TODO
+      <Container fluid textAlign="center">
+        <Header as="h3" >Informations concernant le robot {this.props.robot.name}</Header>
+        <br/>
+        <ReactTable
+          defaultPageSize="20"
+          data={this.props.sensors}
+          columns={columns}
+          defaultSorting={[{id: 'name', asc: true}]}
+          previousText="Précédent"
+          nextText="Suivant"
+          loadingText="Chargement..."
+          noDataText="Aucune données"
+          pageText="Page"
+          ofText="sur"
+          rowsText="lignes"
+        />
       </Container>
     );
   }
@@ -21,10 +57,13 @@ Home.propTypes = {
   mode: PropTypes.any,
   robot: PropTypes.any,
   processing: PropTypes.any,
+  sensors: PropTypes.any,
 };
 
 function mapStateToProps(state) { // eslint-disable-line no-unused-vars
   return {
+    robot: getRobotDefault(state),
+    sensors: getSensorsValues(this.robot.id())
   };
 }
 
