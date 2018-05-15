@@ -1,0 +1,17 @@
+# Tools
+
+vim
+curl
+build-essential
+gnupg
+
+# Services
+
+nginx
+mariadb-server
+nodejs
+php-fpm
+
+# Php Libs
+
+php-mysqli

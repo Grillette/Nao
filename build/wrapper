@@ -1,0 +1,11 @@
+#!/bin/bash
+service nginx start
+service mysql start
+service php7.0-fpm start # It's gonna die soon
+
+mysqladmin -u root -p create naoboxv2
+mysql -u root naoboxv2 < api/models/db.sql
+
+./build.sh
+
+sleep infinity
