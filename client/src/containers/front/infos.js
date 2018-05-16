@@ -14,9 +14,13 @@ class Home extends Component {
     let sensors = [];
     //console.log(this.props);
     let cpu_temp = {
-      name:"tempCPU", libelle:"Température CPU", value: this.props.cpu + "°C", alert: "50°C",
+      name:"tempCPU", libelle:"Température CPU", value: this.props.cpu + "°C", alert: "40°C",
+    };
+    let battery = {
+      name:"battery", libelle:"Niveau de la batterie", value: this.props.battery, alert: "20%",
     };
     sensors.push(cpu_temp);
+    sensors.push(battery);
 
 
     const columns = [
@@ -66,13 +70,15 @@ Home.propTypes = {
   mode: PropTypes.any,
   robot: PropTypes.any,
   processing: PropTypes.any,
-  cpu: PropTypes.any,
+  cpu: PropTypes.string,
+  battery: PropTypes.string,
 };
 
 function mapStateToProps(state) { // eslint-disable-line no-unused-vars
   return {
     robot: getRobotDefault(state),
-    cpu: state.app.nao.cpu
+    cpu: state.app.nao.cpu,
+    battery: state.app.nao.battery
   };
 }
 

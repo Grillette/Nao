@@ -359,7 +359,7 @@ class NAO {
 
   // CPU Temperature
   getCPUTemperature() {
-    return 20;
+    return this.data('Device/SubDeviceList/Head/Temperature/Sensor/Value');
   }
 
   move(x,y,theta) {

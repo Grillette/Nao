@@ -16,7 +16,7 @@ const initialState = {
   nao: {
     battery: '0',
     version : 'none',
-    cpu: 'NaN',
+    cpu: '0',
     processing: false
   }
 };
