@@ -9,6 +9,4 @@ mysql -u root naoboxv2 < api/models/db.sql
 
 service mysql restart
 
-./build.sh
-
 sleep infinity

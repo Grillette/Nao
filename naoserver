@@ -1,0 +1,82 @@
+#!/bin/bash
+
+# MAINTAINER Johan Maurel
+
+name="naoserver"
+container="nao"
+port="80"
+
+function help {
+    echo "     -h, --help : Print help"
+    echo "     -i, --install : To install nao server. Beware the install kill your working instance"
+    echo "     --start : To start nao server"
+    echo "     --stop : To stop nao server"
+    echo "     -c, --compile : To generate the app.js"
+}
+
+function install {
+    docker stop $container
+    docker container prune -f
+    if [ -z $(docker volume list | grep $name) ]; then
+        docker volume create naobox # Mariadb volume for data persistance
+    fi
+    docker build -t $name build/
+    start
+    docker system prune -f
+}
+
+function start {
+    if [ $(docker images | grep $name | wc -c) -gt "0" ]; then
+        if [ $(docker container ps | grep $container | wc -c) -eq "0" ]; then
+            docker run -d --name $container -p80:80 -v$(pwd):/var/www/project naoserver
+        else
+            docker start nao
+        fi
+    else
+        echo "You need to install by taping naoserver --install"
+    fi
+}
+
+function stop {
+    docker stop nao
+}
+
+function compile {
+    docker exec $container bash -c './build.sh'
+}
+
+
+if [ -n $(ls /usr/bin/ | grep "^docker$") ]; then
+
+    if [ $(groups | grep docker | wc -c) -gt "0" ]; then
+
+        if [ $1 == "-h" ] || [ $1 == "--help" ]; then
+            help
+            exit 0
+
+        elif [ $1 == "-i" ] || [ $1 == "--install" ]; then
+            install
+            start
+
+        elif [ $1 == "--start" ]; then
+            start
+
+        elif [ $1 == "--stop" ]; then
+            stop
+
+        elif [ $1 == "-c" ] || [ $1 == "--compile" ]; then
+            compile
+        else
+            echo "Need a valid argument"
+            help
+            exit 1
+        fi
+
+    else
+        echo "Need execution permission on docker"
+        exit 1
+    fi
+else
+    echo "Install docker"
+    exit 1
+fi

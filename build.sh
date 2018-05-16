@@ -9,4 +9,3 @@ npm run dist
 cp -R dist/assets ../
 cp dist/index.html ../
 cp src/qimessaging.js ../assets/
-npm start

@@ -5,8 +5,8 @@ MAINTAINER Johan Maurel
 COPY requirements.txt /opt
 RUN apt-get update -q && apt-get install -yq --no-install-recommends $(cat /opt/requirements.txt | sed "/^[ \t]*$/d" | grep -v '#' )
 
-RUN curl http://deb.nodesource.com/setup_10.x > setup_10.x
-RUN chmod +x setup_10.x && ./setup_10.x
+RUN curl http://deb.nodesource.com/setup_10.x > setup
+RUN chmod +x setup && ./setup
 RUN apt-get install -y nodejs
 
 # Cfg dump
