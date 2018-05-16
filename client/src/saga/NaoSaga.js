@@ -16,10 +16,12 @@ import {
   NAO_GET_BEHAVIOR_LIST_RECIEVE,
   NAO_SET_BATTERY_CHARGE,
   NAO_GET_BATTERY,
+  NAO_SET_CPU_TEMPERATURE,
+  NAO_GET_CPU_TEMPERATURE,
   NAO_SET_SYSTEM_VERSION,
   NAO_STOP_ALL_BEHAVIOR,
   NAO_SHUTDOWN,
-  
+
   NOTIFICATION_ADD,
   BEHAVIOR_PROGRESS_SET_LOADING,
   LOADING_SET_LOADING
@@ -31,21 +33,25 @@ function * connect(action) {
     if (isUndefined(action.payload) || isEmpty(action.payload) || isNull(action.payload)) {
       throw new Error('L\'ip du robot est invalide :/\n Il sera impossible d\'ajouter des commandes !')
     }
-    
+
     yield put({type: LOADING_SET_LOADING, payload: true});
-    
+
     let data = yield call(Nao.init, action.payload + ':80');
-    
+
     // erreur de connexion
     if (data.hasOwnProperty('error')) throw new Error(data.error);
-    
+
     // get battery
     let battery = yield call(Nao.getBatteryCharge, null);
     yield put({type: NAO_SET_BATTERY_CHARGE, payload: battery.toString()});
-  
+
+    // get cpu temperature
+    let cpu_temp = yield call(Nao.getCPUTemperature(), null);
+    yield put ({type: NAO_SET_CPU_TEMPERATURE, payload: cpu_temp.toString()});
+
     let version = yield call(Nao.getSystemVersion, null);
     yield put({type: NAO_SET_SYSTEM_VERSION, payload: version.toString()});
-    
+
     yield put({type: LOADING_SET_LOADING, payload: false});
   } catch (e) {
     yield put({type: LOADING_SET_LOADING, payload: false});
@@ -166,6 +172,15 @@ function * shutdown() {
   }
 }
 
+function * getCPUTemperature() {
+  try{
+    let data = yield call(Nao.getCPUTemperature, null);
+    yield put({type: NAO_SET_CPU_TEMPERATURE, payload: data.toString()});
+    if(data.hasOwnProperty('error')) throw new Error(data.error);
+  } catch (e) {
+  }
+}
+
 function * NaoSaga() {
   yield [
     takeLatest(NAO_CONNECT, connect),
@@ -178,6 +193,7 @@ function * NaoSaga() {
     takeLatest(NAO_MOVE, move),
     takeLatest(NAO_MOVE_HEAD, moveHead),
     takeLatest(NAO_GET_BATTERY, getBattery),
+    takeLatest(NAO_GET_CPU_TEMPERATURE,getCPUTemperature),
     takeLatest(NAO_SHUTDOWN, shutdown),
   ];
 }

@@ -9,7 +9,7 @@ class NAO {
     this.connected = false;
     this.ip = null;
     this.inprogress = false;
-    
+
     // merci javascript :') Obligé de bind all !
     this.init = this.init.bind(this);
     this.shutdown = this.shutdown.bind(this);
@@ -39,8 +39,9 @@ class NAO {
     this.getIP = this.getIP.bind(this);
     this.getInProgress = this.getInProgress.bind(this);
     this.setInProgress = this.setInProgress.bind(this);
+    this.getCPUTemperature = this.getCPUTemperature.bind(this);
   }
-  
+
   // /!\ un reject doit forcement retourner une exception ! new Error('message');
   init(ip) {
     return new Promise((resolve, reject) => {
@@ -52,7 +53,7 @@ class NAO {
       }
       this.qis = null;
       this.qis = new QiSession(ip);
-      
+
       this.qis.socket()
         .on('connect', () => {
           this.connected = true;
@@ -72,13 +73,13 @@ class NAO {
         });
     });
   }
-  
+
   disconnect() {
     this.qis = null;
     this.connected = false;
     this.inprogress = false;
   }
-  
+
   shutdown() {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -100,7 +101,7 @@ class NAO {
       );
     });
   }
-  
+
   reboot() {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -122,7 +123,7 @@ class NAO {
       );
     });
   }
-  
+
   getSystemVersion() {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -144,7 +145,7 @@ class NAO {
       );
     });
   }
-  
+
   getBatteryCharge() {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -164,7 +165,7 @@ class NAO {
       );
     });
   }
-  
+
   behavior(data) {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -188,7 +189,7 @@ class NAO {
       );
     });
   }
-  
+
   behaviorList() {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -211,7 +212,7 @@ class NAO {
       );
     });
   }
-  
+
   say(data) {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -233,7 +234,7 @@ class NAO {
       );
     });
   }
-  
+
   rasta(data) {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -255,7 +256,7 @@ class NAO {
       );
     });
   }
-  
+
   stopAllBehavior() {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -279,7 +280,7 @@ class NAO {
       );
     });
   }
-  
+
   data(keyData) {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -301,61 +302,66 @@ class NAO {
       );
     });
   }
-  
+
   // Epaule
   getRShoulderTemperature() {
     return this.data('Device/SubDeviceList/RShoulderPitch/Temperature/Sensor/Value');
   }
-  
+
   // Epaule
   getLShoulderTemperature() {
     return this.data('Device/SubDeviceList/LShoulderPitch/Temperature/Sensor/Value');
   }
-  
+
   // Coude
   getRElbowTemperature() {
     return this.data('Device/SubDeviceList/RElbowYaw/Temperature/Sensor/Value');
   }
-  
+
   // Coude
   getLElbowTemperature() {
     return this.data('Device/SubDeviceList/LElbowYaw/Temperature/Sensor/Value');
   }
-  
+
   // Hanche
   getRHipTemperature() {
     return this.data('Device/SubDeviceList/RHipPitch/Temperature/Sensor/Value');
   }
-  
+
   // Hanche
   getLHipTemperature() {
     return this.data('Device/SubDeviceList/LHipPitch/Temperature/Sensor/Value');
   }
-  
+
   // GENOU
   getRKneeTemperature() {
     return this.data('Device/SubDeviceList/RKneePitch/Temperature/Sensor/Value');
   }
-  
+
   // GENOU
   getLKneeTemperature() {
     return this.data('Device/SubDeviceList/LKneePitch/Temperature/Sensor/Value');
   }
-  
+
   // poids pied
   getRFootWeight() {
     return this.data('Device/SubDeviceList/RFoot/FSR/TotalWeight/Sensor/Value');
   }
-  
+
   // poids pied
   getLFootWeight() {
     return this.data('Device/SubDeviceList/LFoot/FSR/TotalWeight/Sensor/Value');
   }
-  
+
   getBatteryChargeData() {
     return this.data('Device/SubDeviceList/Battery/Charge/Sensor/Value');
   }
-  
+
+  // CPU Temperature
+  getCPUTemperature() {
+    return 20;
+  }
+
   move(x,y,theta) {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -379,7 +385,7 @@ class NAO {
       );
     });
   }
-  
+
   moveHead(mode,x,y) {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -403,22 +409,22 @@ class NAO {
       );
     });
   }
-  
+
   // set ip
   setIP(ip) {
     this.ip = ip;
   }
-  
+
   // get ip
   getIP() {
     return this.ip;
   }
-  
+
   // set inprogress
   setInProgress(inprogress) {
     this.inprogress = inprogress;
   }
-  
+
   // get inprogress
   getInProgress() {
     return this.inprogress;

@@ -14,18 +14,20 @@ import { NaoConnect, RobotGet, NaoGetBattery } from '../../../actions';
 import NaoApi from '../../../services/naoClass';
 
 class App extends Component {
-  
+
   componentWillMount() {
     this.props.actions.RobotGet();
   }
-    
+
   componentDidUpdate() {
     if (!isUndefined(this.props.defaultRobot) && !NaoApi.connected) {
       this.props.actions.NaoConnect(this.props.defaultRobot.ip_address);
     }
   }
-  
+
   render() {
+
+    console.log(this);
     return (
       <div>
         <Header/>

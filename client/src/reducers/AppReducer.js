@@ -3,9 +3,10 @@ import {
   MODE_SET,
   ROBOT_SET_DEFAULT,
   BEHAVIOR_PROGRESS_SET_LOADING,
-  
+
   NAO_SET_BATTERY_CHARGE,
   NAO_SET_SYSTEM_VERSION,
+  NAO_SET_CPU_TEMPERATURE,
 } from '../actions';
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   nao: {
     battery: '0',
     version : 'none',
+    cpu: 'NaN',
     processing: false
   }
 };
@@ -25,32 +27,37 @@ export default function (state = initialState, action) {
   let nextState = {...state};
 
   switch (action.type) {
-    
+
     case FILTER_SET:
       nextState.filter = action.payload;
       return nextState;
       break;
-      
+
     case MODE_SET:
       nextState.mode = action.payload;
       return nextState;
       break;
-      
+
     case ROBOT_SET_DEFAULT:
       nextState.default = action.payload;
       return nextState;
       break;
-      
+
     case NAO_SET_BATTERY_CHARGE:
       nextState.nao.battery = action.payload;
       return nextState;
       break;
-  
+
+    case NAO_SET_CPU_TEMPERATURE:
+      nextState.nao.cpu = action.payload;
+      return nextState;
+      break;
+
     case NAO_SET_SYSTEM_VERSION:
       nextState.nao.version = action.payload;
       return nextState;
       break;
-      
+
     case BEHAVIOR_PROGRESS_SET_LOADING:
       nextState.nao.processing = action.payload;
       return nextState;

@@ -3,12 +3,21 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Container, Header, Table } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
+import ReactTable from 'react-table';
 import getRobotDefault from "../../selectors/getRobotDefault";
 
 class Home extends Component {
 
   render() {
+
+    let sensors = [];
+    //console.log(this.props);
+    let cpu_temp = {
+      name:"tempCPU", libelle:"Température CPU", value: this.props.cpu + "°C", alert: "50°C",
+    };
+    sensors.push(cpu_temp);
+
 
     const columns = [
       {
@@ -36,7 +45,7 @@ class Home extends Component {
         <br/>
         <ReactTable
           defaultPageSize="20"
-          data={this.props.sensors}
+          data={sensors}
           columns={columns}
           defaultSorting={[{id: 'name', asc: true}]}
           previousText="Précédent"
@@ -57,13 +66,13 @@ Home.propTypes = {
   mode: PropTypes.any,
   robot: PropTypes.any,
   processing: PropTypes.any,
-  sensors: PropTypes.any,
+  cpu: PropTypes.any,
 };
 
 function mapStateToProps(state) { // eslint-disable-line no-unused-vars
   return {
     robot: getRobotDefault(state),
-    sensors: getSensorsValues(this.robot.id())
+    cpu: state.app.nao.cpu
   };
 }
 

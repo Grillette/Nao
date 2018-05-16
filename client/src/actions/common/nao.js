@@ -11,6 +11,9 @@ export const NAO_SHUTDOWN = 'NAO_SHUTDOWN';
 export const NAO_GET_BATTERY = 'NAO_GET_BATTERY';
 export const NAO_GET_BATTERY_RECIEVE = 'NAO_GET_BATTERY_RECIEVE';
 
+export const NAO_GET_CPU_TEMPERATURE = 'NAO_GET_CPU_TEMPERATURE';
+export const NAO_SET_CPU_TEMPERATURE = 'NAO_SET_CPU_TEMPERATURE';
+
 export const NAO_GET_DATA = 'NAO_GET_DATA';
 export const NAO_GET_DATA_RECIEVE = 'NAO_GET_DATA_RECIEVE';
 
@@ -107,6 +110,20 @@ export function moveHead(payload) {
 export function getBattery(payload) {
   return {
     type: NAO_GET_BATTERY,
+    payload
+  }
+}
+
+export function getCPUTemperature(payload) {
+  return {
+    type: NAO_GET_CPU_TEMPERATURE,
+    payload
+  }
+}
+
+export function setCPUTemperature(payload) {
+  return {
+    type: NAO_SET_CPU_TEMPERATURE,
     payload
   }
 }
