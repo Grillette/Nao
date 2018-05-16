@@ -55,7 +55,8 @@ CREATE TABLE `peripheral` (
 INSERT INTO `peripheral` (`id`, `name`, `description`, `mac_address`, `ip_address`) VALUES
   (1, 'localhost', 'dev - stub pour le localhost', '00:00:00:00:00:00', '127.0.0.1'),
   (2, 'test', 'test', 'ff:ff:ff:ff:ff:ff', NULL),
-  (3, 'PC-AURELIEN', 'Bé son pc :)', '00:28:F8:06:32:7C', NULL);
+  (3, 'PC-AURELIEN', 'Bé son pc :)', '00:28:F8:06:32:7C', NULL),
+  (4, 'Docker-local-stub', 'none', '00:00:00:00:00:00', '172.17.0.1');
 
 -- --------------------------------------------------------
 
