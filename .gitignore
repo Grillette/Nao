@@ -1,0 +1,7 @@
+# IDE/Editor data
+.idea/
+
+# Compilation products
+assets
+index.html
+client/package-lock.json

@@ -1,5 +1,5 @@
 #!/bin/bash
-service nginx start
+service apache2 start
 service mysql start
 service php7.0-fpm start # It's gonna die soon
 

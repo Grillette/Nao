@@ -15,20 +15,64 @@ function help {
 }
 
 function install {
+
+    echo "Do you want to construct the image by your own: y or n ?"
+    read answer
+
+    while [[ $answer != "y" && $answer != "n" ]]
+    do
+        if [ $answer == "q" ]; then
+            exit 0
+        fi
+        echo "you have entered an invalid response. Please try again"
+        echo "Do you want to construct the image by your own : y or n ?"
+        read answer
+    done
+
+    echo "You are installing on the raspberry pi: y or n ?"
+    read answer1
+
+    while [[ $answer1 != "y" && $answer1 != "n" ]]
+    do
+        if [ $answer1 == "q" ]; then
+            exit 0
+        fi
+        echo "you have entered an invalid response. Please try again"
+        echo "You are installing on the raspberry pi: y or n ?"
+        read answer1
+    done
+
     docker stop $container
     docker container prune -f
+
     if [ -z $(docker volume list | grep $name) ]; then
         docker volume create naobox # Mariadb volume for data persistance
     fi
-    docker build -t $name build/
+
+    if [ $answer == "y" ]; then
+        if [ $answer1 == "y" ]; then
+            docker build -t $name build/rpi
+        else
+            docker build -t $name build/
+        fi
+    else
+        if [ $answer1 == "y" ]; then
+            docker pull cactusmamelut/rpi-naoboxv2-iiil
+            docker tag cactusmamelut/rpi-naoboxv2-iiil naoserver
+        else
+            docker pull cactusmamelut/naoboxv2-iiil
+            docker tag cactusmamelut/naoboxv2-iiil naoserver
+        fi
+    fi
     start
     docker system prune -f
 }
 
 function start {
     if [ $(docker images | grep $name | wc -c) -gt "0" ]; then
+        docker container prune -f
         if [ $(docker container ps | grep $container | wc -c) -eq "0" ]; then
-            docker run -d --name $container -p80:80 -v$(pwd):/var/www/project naoserver
+            docker run -d --name $container -p80:80 -v$(pwd):/var/www/project $name
         else
             docker start nao
         fi
@@ -56,7 +100,6 @@ if [ -n $(ls /usr/bin/ | grep "^docker$") ]; then
 
         elif [ $1 == "-i" ] || [ $1 == "--install" ]; then
             install
-            start
 
         elif [ $1 == "--start" ]; then
             start

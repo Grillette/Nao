@@ -2,16 +2,30 @@
 
 vim
 curl
+wget
 build-essential
 gnupg
+lynx-cur
+ca-certificates
+bzr
+git
+mercurial
+openssh-client
+subversion
+procps
+autoconf
+automake
+bzip2
+file
 
 # Services
 
-nginx
+apache2
+php7.0
 mariadb-server
 nodejs
-php-fpm
 
 # Php Libs
 
-php-mysqli
+php7.0-mysql
+libapache2-mod-php7.0
