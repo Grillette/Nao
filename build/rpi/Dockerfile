@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM resin/rpi-raspbian:stretch
 MAINTAINER Johan Maurel
 
 # Install dependencies
