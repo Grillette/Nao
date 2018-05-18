@@ -72,7 +72,25 @@ function start {
     if [ $(docker images | grep $name | wc -c) -gt "0" ]; then
         docker container prune -f
         if [ $(docker container ps | grep $container | wc -c) -eq "0" ]; then
-            docker run -d --name $container -p80:80 -v$(pwd):/var/www/project $name
+            echo "You are installing on the raspberry pi: y or n ?"
+            read answer1
+
+            while [[ $answer1 != "y" && $answer1 != "n" ]]
+            do
+                if [ $answer1 == "q" ]; then
+                    exit 0
+                fi
+                echo "you have entered an invalid response. Please try again"
+                echo "You are installing on the raspberry pi: y or n ?"
+                read answer1
+            done
+
+            if [ $answer1 == "y" ]; then
+                docker run -d --name $container --restart=always -p80:80 -v$(pwd):/var/www/project $name
+            else
+                docker run -d --name $container -p80:80 -v$(pwd):/var/www/project $name
+            fi
+            
         else
             docker start nao
         fi
