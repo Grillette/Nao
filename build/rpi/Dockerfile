@@ -19,7 +19,7 @@ ENV APACHE_LOG_DIR /var/log/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
 ENV APACHE_PID_FILE /var/run/apache2.pid
 
-ADD ../apache-config.conf /etc/apache2/sites-enabled/000-default.conf
+ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
 
 # gpg keys listed at https://github.com/nodejs/node
 RUN set -ex \
@@ -49,7 +49,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 RUN mkdir -p /var/www/project
 
 # Wrapper set
-COPY ../wrapper /usr/local/bin
+COPY wrapper /usr/local/bin
 RUN chmod +x /usr/local/bin/wrapper
 
 WORKDIR /var/www/project
