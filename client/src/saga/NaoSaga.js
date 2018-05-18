@@ -41,7 +41,6 @@ function * connect(action) {
     yield put({type: LOADING_SET_LOADING, payload: true});
 
     let data = yield call(Nao.init, action.payload + ':80');
-    console.log("Data : " + data);
 
     // erreur de connexion
     if (data.hasOwnProperty('error')) throw new Error(data.error);
@@ -58,12 +57,12 @@ function * connect(action) {
 
     // get LFoot weight
     let lfoot_weight = yield call(Nao.getLFootWeight, null);
-    yield put ({type: NAO_SET_LFOOT_WEIGHT, payload: cpu_temp.toString()});
+    yield put ({type: NAO_SET_LFOOT_WEIGHT, payload: lfoot_weight.toString().substring(0, 5)});
     console.log("LFoot_temps : " + lfoot_weight);
 
     // get RFoot weight
     let rfoot_weight = yield call(Nao.getRFootWeight, null);
-    yield put ({type: NAO_SET_RFOOT_WEIGHT, payload: cpu_temp.toString()});
+    yield put ({type: NAO_SET_RFOOT_WEIGHT, payload: rfoot_weight.toString().substring(0, 5)});
     console.log("RFoot_temps : " + rfoot_weight);
 
     let version = yield call(Nao.getSystemVersion, null);

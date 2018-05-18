@@ -200,7 +200,7 @@ class NAO {
       this.qis.service('ALBehaviorManager').then(
         (ALSystem) => {
           // ALSystem.getInstalledBehaviors().done((data) => {
-          ALSystem.getBehaviorNames().done((data) => {
+          ALSystem.getInstalledBehaviors().done((data) => {
             resolve(data);
           });
         },

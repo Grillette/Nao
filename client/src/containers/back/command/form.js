@@ -14,7 +14,7 @@ import { GenerateField } from '../../../utils/InputGenerator';
 const trim = value => value && value.trim();
 
 class CommandForm extends Component {
-  
+
   componentWillMount() {
     const initData = {
       id: this.props.current ? this.props.current.id : null,
@@ -25,9 +25,9 @@ class CommandForm extends Component {
     };
     this.props.initialize(initData);
   }
-  
+
   render() {
-    
+
     let options = [
       {
         key: 'test',
@@ -35,15 +35,17 @@ class CommandForm extends Component {
         text: 'test',
       }
     ];
-    
+
     forEach(this.props.behaviorList, (behavior) => {
       options.push({
         key: behavior,
         value: behavior,
         text: behavior
       });
+      //console.log("test");
+      //console.log(this.props.behaviorList);
     });
-    
+
     return isUndefined(this.props.current) ? (
         <Container fluid>
           <Header as="h1">Commande innexistante</Header>
@@ -79,19 +81,19 @@ CommandForm.propTypes = {
 
 function validate(formProps) {
   const errors = {};
-  
+
   if (!formProps.name) {
     errors.name = 'Entrez un nom pour l\'action';
   }
-  
+
   if (!formProps.action) {
     errors.action = 'Entrez une action';
   }
-  
+
   if (!formProps.description) {
     errors.description = 'Entrez une description';
   }
-  
+
   return errors;
 }
 
