@@ -1,0 +1,31 @@
+# Tools
+
+vim
+curl
+wget
+build-essential
+gnupg
+lynx-cur
+ca-certificates
+bzr
+git
+mercurial
+openssh-client
+subversion
+procps
+autoconf
+automake
+bzip2
+file
+
+# Services
+
+apache2
+php7.0
+mariadb-server
+nodejs
+
+# Php Libs
+
+php7.0-mysql
+libapache2-mod-php7.0
