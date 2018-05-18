@@ -82,6 +82,10 @@ export {
   NAO_GET_CPU_TEMPERATURE,
   NAO_GET_BATTERY_RECIEVE,
   NAO_SHUTDOWN,
+  NAO_SET_LFOOT_WEIGHT,
+  NAO_GET_LFOOT_WEIGHT,
+  NAO_SET_RFOOT_WEIGHT,
+  NAO_GET_RFOOT_WEIGHT,
 
   // ACTION CREATOR
   connect as NaoConnect,
@@ -99,6 +103,10 @@ export {
   getBattery as NaoGetBattery,
   getCPUTemperature as NAOGetCPUTemperature,
   setCPUTemperature as NAOSetCPUTemperature,
+  getLFootWeight as NAOGetLFootWeight,
+  setLFootWeight as NAOSetLFootWeight,
+  getRFootWeight as NAOGetRFootWeight,
+  setRFootWeight as NAOSetRFootWeight,
   shutdown as NaoShutdown
 } from './common/nao';
 

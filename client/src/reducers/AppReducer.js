@@ -7,6 +7,8 @@ import {
   NAO_SET_BATTERY_CHARGE,
   NAO_SET_SYSTEM_VERSION,
   NAO_SET_CPU_TEMPERATURE,
+  NAO_SET_RFOOT_WEIGHT,
+  NAO_SET_LFOOT_WEIGHT,
 } from '../actions';
 
 const initialState = {
@@ -17,6 +19,8 @@ const initialState = {
     battery: '0',
     version : 'none',
     cpu: '0',
+    lfootWeight: '0',
+    rfootWeight: '0',
     processing: false
   }
 };
@@ -50,6 +54,16 @@ export default function (state = initialState, action) {
 
     case NAO_SET_CPU_TEMPERATURE:
       nextState.nao.cpu = action.payload;
+      return nextState;
+      break;
+
+    case NAO_SET_LFOOT_WEIGHT:
+      nextState.nao.lfootWeight = action.payload;
+      return nextState;
+      break;
+
+    case NAO_SET_RFOOT_WEIGHT:
+      nextState.nao.rfootWeight = action.payload;
       return nextState;
       break;
 

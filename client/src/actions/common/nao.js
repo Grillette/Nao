@@ -14,6 +14,12 @@ export const NAO_GET_BATTERY_RECIEVE = 'NAO_GET_BATTERY_RECIEVE';
 export const NAO_GET_CPU_TEMPERATURE = 'NAO_GET_CPU_TEMPERATURE';
 export const NAO_SET_CPU_TEMPERATURE = 'NAO_SET_CPU_TEMPERATURE';
 
+export const NAO_GET_LFOOT_WEIGHT = 'NAO_GET_LFOOT_WEIGHT';
+export const NAO_SET_LFOOT_WEIGHT = 'NAO_SET_LFOOT_WEIGHT';
+
+export const NAO_GET_RFOOT_WEIGHT = 'NAO_GET_RFOOT_WEIGHT';
+export const NAO_SET_RFOOT_WEIGHT = 'NAO_SET_RFOOT_WEIGHT';
+
 export const NAO_GET_DATA = 'NAO_GET_DATA';
 export const NAO_GET_DATA_RECIEVE = 'NAO_GET_DATA_RECIEVE';
 
@@ -124,6 +130,34 @@ export function getCPUTemperature(payload) {
 export function setCPUTemperature(payload) {
   return {
     type: NAO_SET_CPU_TEMPERATURE,
+    payload
+  }
+}
+
+export function getLFootWeight(payload) {
+  return {
+    type: NAO_GET_LFOOT_WEIGHT,
+    payload
+  }
+}
+
+export function setLFootWeight(payload) {
+  return {
+    type: NAO_SET_LFOOT_WEIGHT,
+    payload
+  }
+}
+
+export function getRFootWeight(payload) {
+  return {
+    type: NAO_GET_RFOOT_WEIGHT,
+    payload
+  }
+}
+
+export function setRFootWeight(payload) {
+  return {
+    type: NAO_SET_RFOOT_WEIGHT,
     payload
   }
 }

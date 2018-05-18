@@ -19,8 +19,16 @@ class Home extends Component {
     let battery = {
       name:"battery", libelle:"Niveau de la batterie", value: this.props.battery, alert: "20%",
     };
+    let lfoot_weight = {
+      name:"lfootWeight", libelle:"Poids du pieds gauche", value: this.props.lfootWeight + " kg", alert: "5kg",
+    };
+    let rfoot_weight = {
+      name: "rfootWeight", libelle:"Poids du pied droit", value: this.props.rfootWeight + " kg", alert: "5kg",
+    }
     sensors.push(cpu_temp);
     sensors.push(battery);
+    sensors.push(lfoot_weight);
+    sensors.push(rfoot_weight);
 
 
     const columns = [
@@ -72,13 +80,17 @@ Home.propTypes = {
   processing: PropTypes.any,
   cpu: PropTypes.string,
   battery: PropTypes.string,
+  lfootWeight: PropTypes.string,
+  rfootWeight: PropTypes.string,
 };
 
 function mapStateToProps(state) { // eslint-disable-line no-unused-vars
   return {
     robot: getRobotDefault(state),
     cpu: state.app.nao.cpu,
-    battery: state.app.nao.battery
+    battery: state.app.nao.battery,
+    lfootWeight: state.app.nao.lfootWeight,
+    rfootWeight: state.app.nao.rfootWeight,
   };
 }
 

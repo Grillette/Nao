@@ -20,6 +20,10 @@ import {
   NAO_GET_CPU_TEMPERATURE,
   NAO_SET_SYSTEM_VERSION,
   NAO_STOP_ALL_BEHAVIOR,
+  NAO_SET_LFOOT_WEIGHT,
+  NAO_GET_LFOOT_WEIGHT,
+  NAO_SET_RFOOT_WEIGHT,
+  NAO_GET_RFOOT_WEIGHT,
   NAO_SHUTDOWN,
 
   NOTIFICATION_ADD,
@@ -51,6 +55,16 @@ function * connect(action) {
     let cpu_temp = yield call(Nao.getCPUTemperature, null);
     yield put ({type: NAO_SET_CPU_TEMPERATURE, payload: cpu_temp.toString()});
     console.log("cpu_temp : " + cpu_temp);
+
+    // get LFoot weight
+    let lfoot_weight = yield call(Nao.getLFootWeight, null);
+    yield put ({type: NAO_SET_LFOOT_WEIGHT, payload: cpu_temp.toString()});
+    console.log("LFoot_temps : " + lfoot_weight);
+
+    // get RFoot weight
+    let rfoot_weight = yield call(Nao.getRFootWeight, null);
+    yield put ({type: NAO_SET_RFOOT_WEIGHT, payload: cpu_temp.toString()});
+    console.log("RFoot_temps : " + rfoot_weight);
 
     let version = yield call(Nao.getSystemVersion, null);
     yield put({type: NAO_SET_SYSTEM_VERSION, payload: version.toString()});
@@ -159,7 +173,6 @@ function * moveHead(action) {
 function * getBattery() {
   try {
     let data = yield call(Nao.getBatteryCharge, null);
-    console.log("battery2 : " + data);
     if (data.hasOwnProperty('error')) throw new Error(data.error);
     yield put({type: NAO_SET_BATTERY_CHARGE, payload: data.toString()});
   } catch (e) {
@@ -188,6 +201,28 @@ function * getCPUTemperature() {
   }
 }
 
+function * getLFootWeight() {
+  try {
+    let data = yield call(Nao.getLFootWeight, null);
+    console.log("Lfootweight2 : " + data);
+    if (data.hasOwnProperty('error')) throw new Error(data.error);
+    yield put({type: NAO_SET_LFOOT_WEIGHT, payload: data.toString()});
+  } catch (e) {
+    yield put({type: NOTIFICATION_ADD, payload: {id: Math.random(), message : e.message, type : 'negative'}});
+  }
+}
+
+function * getRFootWeight() {
+  try {
+    let data = yield call(Nao.getRFootWeight, null);
+    console.log("Rfootweight2 : " + data);
+    if (data.hasOwnProperty('error')) throw new Error(data.error);
+    yield put({type: NAO_SET_RFOOT_WEIGHT, payload: data.toString()});
+  } catch (e) {
+    yield put({type: NOTIFICATION_ADD, payload: {id: Math.random(), message : e.message, type : 'negative'}});
+  }
+}
+
 function * NaoSaga() {
   yield [
     takeLatest(NAO_CONNECT, connect),
@@ -201,6 +236,8 @@ function * NaoSaga() {
     takeLatest(NAO_MOVE_HEAD, moveHead),
     takeLatest(NAO_GET_BATTERY, getBattery),
     takeLatest(NAO_GET_CPU_TEMPERATURE,getCPUTemperature),
+    takeLatest(NAO_GET_LFOOT_WEIGHT, getLFootWeight),
+    takeLatest(NAO_GET_RFOOT_WEIGHT, getRFootWeight),
     takeLatest(NAO_SHUTDOWN, shutdown),
   ];
 }
