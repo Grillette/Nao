@@ -12,7 +12,8 @@
     "serve:dev": "webpack-dev-server --open --env dev",
     "serve:dist": "webpack-dev-server --open --env dist -p --progress",
     "start": "npm run serve:dev",
-    "perso": "npm run dist && cp -R dist/assets ../ && cp dist/index.html ../ && cp src/qimessaging.js ../assets/"
+    "perso": "webpack --progress --bail --env dist -p",
+    "dump": "npm run dist && cp -R dist/assets ../ && cp dist/index.html ../ && cp src/qimessaging.js ../assets/"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

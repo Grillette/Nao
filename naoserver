@@ -59,13 +59,14 @@ function install {
     else
         if [ $answer1 == "y" ]; then
             docker pull cactusmamelut/rpi-naoboxv2-iiil
-            docker tag cactusmamelut/rpi-naoboxv2-iiil naoserver
+            docker tag cactusmamelut/rpi-naoboxv2-iiil $name
         else
             docker pull cactusmamelut/naoboxv2-iiil
-            docker tag cactusmamelut/naoboxv2-iiil naoserver
+            docker tag cactusmamelut/naoboxv2-iiil $name
         fi
     fi
     start
+    compile
     docker system prune -f
 }
 
@@ -73,7 +74,7 @@ function start {
     if [ $(docker images | grep $name | wc -c) -gt "0" ]; then
         docker container prune -f
         if [ $(docker container ps | grep $container | wc -c) -eq "0" ]; then
-            echo "You are installing on the raspberry pi: y or n ?"
+            echo "You are running on the raspberry pi: y or n ?"
             read answer1
 
             while [[ $answer1 != "y" && $answer1 != "n" ]]
