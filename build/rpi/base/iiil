@@ -1,0 +1,13 @@
+$TTL 10800
+$ORIGIN iiil.
+@	IN SOA ns1.iiil. root.iiil. (
+	20160505;
+	3h;
+	1h;
+	1w;
+	1h);
+@	IN NS ns1.iiil.
+ns1	IN A 10.0.0.1
+nao	IN A 10.0.0.1
+polo	IN A 10.0.0.2
+blue    IN A 10.0.0.3
