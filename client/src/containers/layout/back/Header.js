@@ -8,20 +8,20 @@ import { Link } from 'react-router';
 import { LoginDisconnect } from '../../../actions';
 
 class Header extends Component {
-  
+
   constructor(){
     super();
     this.handleDeconnexion = this.handleDeconnexion.bind(this);
   }
-  
+
   handleDeconnexion() {
     this.props.actions.LoginDisconnect();
   }
-  
+
   render() {
     return (
       <Menu vertical fixed='left' inverted className="overflow-menu-admin">
-        <Menu.Item as={Link} to="admin">
+        <Menu.Item as={Link} to="admin/robot">
           <strong>
             NAOBOX V2 - Admin
           </strong>
