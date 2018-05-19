@@ -21,17 +21,17 @@ function * login(action) {
     yield put({type: LOADING_SET_LOADING, payload: true});
     let data = yield call(apiClass.authRequest(action.payload));
     if (data.hasOwnProperty('error')) throw new Error(data.error);
-    
+
     if (action.payload.rememberMe) {
       localStorage.setItem('nao', JSON.stringify(data));
     }
 
     // set token
     apiClass.setToken(data.token);
-    
+
     yield put({type: LOGIN_CONNECT_OK, payload: data});
     yield put({type: NOTIFICATION_ADD, payload: {id: Math.random(), message : 'Connecté', type : 'positive'}});
-    yield put({type: ROUTEUR_LOCATION_CHANGE, payload: {pathname: '/admin', query: {}}});
+    yield put({type: ROUTEUR_LOCATION_CHANGE, payload: {pathname: '/admin/robot', query: {}}});
     yield put({type: LOADING_SET_LOADING, payload: false});
   } catch (error) {
     yield put({type: NOTIFICATION_ADD, payload: {id: Math.random(), message : error.message, type : 'negative'}});
@@ -43,12 +43,12 @@ function * token(action) {
     try {
       yield put({type: LOADING_SET_LOADING, payload: true});
       let data = JSON.parse(localStorage.getItem('nao'));
-      
+
       if (!isNull(data) && data.hasOwnProperty('token') && moment().isBefore(moment(Number(jwtDecode(data.token).exp + '000')))) {
         apiClass.setToken(data.token);
         yield put({type: LOGIN_CONNECT_OK, payload: data});
       }
-      
+
       if (!isNull(apiClass.getToken()) &&  !isUndefined(apiClass.getToken()) &&  moment().isBefore(moment(Number(jwtDecode(apiClass.getToken()).exp + '000')))) {
         // TODO rediriger que si l'url d'arriver est different de admin
         //   yield put({type: ROUTEUR_LOCATION_CHANGE, payload: {pathname: '/admin', query: {}}});
@@ -71,7 +71,7 @@ function * disconnect() {
   }
   // delete
   apiClass.setToken(undefined);
-  
+
   // redirect
   yield put({type: ROUTEUR_LOCATION_CHANGE, payload: {pathname: '/login', query: {}}});
 }

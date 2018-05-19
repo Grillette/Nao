@@ -10,6 +10,7 @@ function help {
     echo "     -h, --help : Print help"
     echo "     -i, --install : To install nao server. Beware the install kill your working instance"
     echo "     --start : To start nao server"
+    echo "     --reset : To reset nao server => then you have to relauch it with --start"
     echo "     --stop : To stop nao server"
     echo "     -c, --compile : To generate the app.js"
 }
@@ -58,13 +59,14 @@ function install {
     else
         if [ $answer1 == "y" ]; then
             docker pull cactusmamelut/rpi-naoboxv2-iiil
-            docker tag cactusmamelut/rpi-naoboxv2-iiil naoserver
+            docker tag cactusmamelut/rpi-naoboxv2-iiil $name
         else
             docker pull cactusmamelut/naoboxv2-iiil
-            docker tag cactusmamelut/naoboxv2-iiil naoserver
+            docker tag cactusmamelut/naoboxv2-iiil $name
         fi
     fi
     start
+    compile
     docker system prune -f
 }
 
@@ -72,7 +74,7 @@ function start {
     if [ $(docker images | grep $name | wc -c) -gt "0" ]; then
         docker container prune -f
         if [ $(docker container ps | grep $container | wc -c) -eq "0" ]; then
-            echo "You are installing on the raspberry pi: y or n ?"
+            echo "You are running on the raspberry pi: y or n ?"
             read answer1
 
             while [[ $answer1 != "y" && $answer1 != "n" ]]
@@ -107,6 +109,13 @@ function compile {
     docker exec $container bash -c './build.sh'
 }
 
+function reset {
+    if [ -n $(docker container ps | grep $container) ]; then
+        docker stop $container
+        docker rm $container
+    fi
+}
+
 
 if [ -n $(ls /usr/bin/ | grep "^docker$") ]; then
 
@@ -124,6 +133,9 @@ if [ -n $(ls /usr/bin/ | grep "^docker$") ]; then
 
         elif [ $1 == "--stop" ]; then
             stop
+
+        elif [ $1 == "--reset" ]; then
+            reset
 
         elif [ $1 == "-c" ] || [ $1 == "--compile" ]; then
             compile

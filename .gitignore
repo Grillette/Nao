@@ -5,3 +5,4 @@
 assets
 index.html
 client/package-lock.json
+client/node_modules
