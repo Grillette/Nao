@@ -9,9 +9,10 @@
     "copy": "copyfiles -f ./conf/index.html ./dist && copyfiles -u 1 \"./src/static/**\" ./dist",
     "copyProd": "copyfiles -f ./dist ./build-client",
     "dist": "npm run clean && npm run copy && webpack --progress --bail --env dist -p && npm run copyProd",
-    "serve:dev": "webpack-dev-server --env dev",
+    "serve:dev": "webpack-dev-server --open --env dev",
     "serve:dist": "webpack-dev-server --open --env dist -p --progress",
-    "start": "npm run serve:dev"
+    "start": "npm run serve:dev",
+    "perso": "npm run dist && cp -R dist/assets ../ && cp dist/index.html ../ && cp src/qimessaging.js ../assets/"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
