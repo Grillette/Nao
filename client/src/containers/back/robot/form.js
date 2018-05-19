@@ -13,7 +13,7 @@ import { GenerateField } from '../../../utils/InputGenerator';
 const trim = value => value && value.trim();
 
 class RobotForm extends Component {
-  
+
   componentWillMount() {
     const initData = {
       id: this.props.current ? this.props.current.id : null,
@@ -25,7 +25,7 @@ class RobotForm extends Component {
     };
     this.props.initialize(initData);
   }
-  
+
   render() {
     return isUndefined(this.props.current) ? (
         <Container fluid>
@@ -38,6 +38,7 @@ class RobotForm extends Component {
         <Form onSubmit={this.props.handleSubmit}>
           <Field normalize={trim} label="Nom du robot" name="name" type="text" placeholder="paulette" component={GenerateField} required />
           <Field normalize={trim} label="Addresse MAC" name="mac_address" type="text" placeholder="00:1B:44:11:3A:B7" component={GenerateField} required />
+          <Field normalize={trim} label="Addresse IP" name="ip_address" type="text" placeholder="10.0.0.4" component={GenerateField} required />
           <Field normalize={trim} label="Couleur" name="color" type="text" placeholder="#FFFFFF" component={GenerateField} required />
           <Field label="Robot pas defaut" name="default" type="checkbox" component={GenerateField} />
           <Button positive disabled={this.props.submitting}>Enregistrer</Button>
@@ -60,19 +61,23 @@ RobotForm.propTypes = {
 
 function validate(formProps) {
   const errors = {};
-  
+
   if (!formProps.name) {
     errors.name = 'Entrez un nom au robot';
   }
-  
+
   if (!formProps.mac_address) {
     errors.mac_address = 'Entrez une adresse mac';
   }
-  
+
+  if (!formProps.ip_address) {
+    errors.mac_address = 'Entrez une adresse IP';
+  }
+
   if (!formProps.color) {
     errors.color = 'Entrez une couleur';
   }
-  
+
   return errors;
 }
 
