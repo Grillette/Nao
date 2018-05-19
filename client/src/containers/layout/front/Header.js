@@ -8,7 +8,7 @@ import { Link } from 'react-router';
 import { NaoShutdown } from '../../../actions';
 
 class HeaderContainer extends Component {
-  
+
   constructor() {
     super();
     this.state = {
@@ -18,27 +18,27 @@ class HeaderContainer extends Component {
     this.handleConfirm = this.handleConfirm.bind(this);
     this.handleClickShutdown = this.handleClickShutdown.bind(this);
   }
-  
+
   handleClickShutdown() {
     this.setState({
       shutdown: true
     });
   }
-  
+
   handleCancel() {
     this.setState({
       shutdown: false
     });
   }
-  
+
   handleConfirm() {
     this.setState({
       shutdown: false
     });
     this.props.actions.NaoShutdown();
   }
-  
-  
+
+
   render() {
     let batteryhtml = null;
     if (this.props.battery > 80) {
@@ -57,7 +57,7 @@ class HeaderContainer extends Component {
         <Icon color='red' name='dont'/>
       </Icon.Group>);
     }
-    
+
     return (
       <div>
         <Menu inverted fixed="top" borderless>
@@ -76,7 +76,6 @@ class HeaderContainer extends Component {
           </Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item><Button as={Link} to="admin" inverted icon="wrench"/></Menu.Item>
-            <Menu.Item><Button as={Link} to="home" inverted icon="home"/></Menu.Item>
             <Menu.Item><Button as={Link} to="doc" inverted icon="book"/></Menu.Item>
           </Menu.Menu>
         </Menu>
