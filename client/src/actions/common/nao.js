@@ -20,6 +20,30 @@ export const NAO_SET_LFOOT_WEIGHT = 'NAO_SET_LFOOT_WEIGHT';
 export const NAO_GET_RFOOT_WEIGHT = 'NAO_GET_RFOOT_WEIGHT';
 export const NAO_SET_RFOOT_WEIGHT = 'NAO_SET_RFOOT_WEIGHT';
 
+export const NAO_GET_RSHOULDER_TEMPERATURE = 'NAO_GET_RSHOULDER_TEMPERATURE';
+export const NAO_SET_RSHOULDER_TEMPERATURE = 'NAO_SET_RSHOULDER_TEMPERATURE';
+
+export const NAO_GET_LSHOULDER_TEMPERATURE = 'NAO_GET_LSHOULDER_TEMPERATURE';
+export const NAO_SET_LSHOULDER_TEMPERATURE = 'NAO_SET_LSHOULDER_TEMPERATURE';
+
+export const NAO_GET_RELBOW_TEMPERATURE = 'NAO_GET_RELBOW_TEMPERATURE';
+export const NAO_SET_RELBOW_TEMPERATURE = 'NAO_SET_RELBOW_TEMPERATURE';
+
+export const NAO_GET_LELBOW_TEMPERATURE = 'NAO_GET_LELBOW_TEMPERATURE';
+export const NAO_SET_LELBOW_TEMPERATURE = 'NAO_SET_LELBOW_TEMPERATURE';
+
+export const NAO_GET_RHIP_TEMPERATURE = 'NAO_GET_RHIP_TEMPERATURE';
+export const NAO_SET_RHIP_TEMPERATURE = 'NAO_SET_RHIP_TEMPERATURE';
+
+export const NAO_GET_LHIP_TEMPERATURE = 'NAO_GET_LHIP_TEMPERATURE';
+export const NAO_SET_LHIP_TEMPERATURE = 'NAO_SET_LHIP_TEMPERATURE';
+
+export const NAO_GET_RKNEE_TEMPERATURE = 'NAO_GET_RKNEE_TEMPERATURE';
+export const NAO_SET_RKNEE_TEMPERATURE = 'NAO_SET_RKNEE_TEMPERATURE';
+
+export const NAO_GET_LKNEE_TEMPERATURE = 'NAO_GET_LKNEE_TEMPERATURE';
+export const NAO_SET_LKNEE_TEMPERATURE = 'NAO_SET_LKNEE_TEMPERATURE';
+
 export const NAO_GET_DATA = 'NAO_GET_DATA';
 export const NAO_GET_DATA_RECIEVE = 'NAO_GET_DATA_RECIEVE';
 
@@ -158,6 +182,118 @@ export function getRFootWeight(payload) {
 export function setRFootWeight(payload) {
   return {
     type: NAO_SET_RFOOT_WEIGHT,
+    payload
+  }
+}
+
+export function getRShoulderTemperature(payload) {
+  return {
+    type: NAO_GET_RSHOULDER_TEMPERATURE,
+    payload
+  }
+}
+
+export function setRShoulderTemperature(payload) {
+  return {
+    type: NAO_SET_RSHOULDER_TEMPERATURE,
+    payload
+  }
+}
+
+export function getLShoulderTemperature(payload) {
+  return {
+    type: NAO_GET_LSHOULDER_TEMPERATURE,
+    payload
+  }
+}
+
+export function setLShoulderTemperature(payload) {
+  return {
+    type: NAO_SET_LSHOULDER_TEMPERATURE,
+    payload
+  }
+}
+
+export function getRElbowTemperature(payload) {
+  return {
+    type: NAO_GET_RELBOW_TEMPERATURE,
+    payload
+  }
+}
+
+export function setRElbowTemperature(payload) {
+  return {
+    type: NAO_SET_RELBOW_TEMPERATURE,
+    payload
+  }
+}
+
+export function getLElbowTemperature(payload) {
+  return {
+    type: NAO_GET_LELBOW_TEMPERATURE,
+    payload
+  }
+}
+
+export function setLElbowTemperature(payload) {
+  return {
+    type: NAO_SET_LELBOW_TEMPERATURE,
+    payload
+  }
+}
+
+export function getRHipTemperature(payload) {
+  return {
+    type: NAO_GET_RHIP_TEMPERATURE,
+    payload
+  }
+}
+
+export function setRHipTemperature(payload) {
+  return {
+    type: NAO_SET_RHIP_TEMPERATURE,
+    payload
+  }
+}
+
+export function getLHipTemperature(payload) {
+  return {
+    type: NAO_GET_LHIP_TEMPERATURE,
+    payload
+  }
+}
+
+export function setLHipTemperature(payload) {
+  return {
+    type: NAO_SET_LHIP_TEMPERATURE,
+    payload
+  }
+}
+
+export function getRKneeTemperature(payload) {
+  return {
+    type: NAO_GET_RKNEE_TEMPERATURE,
+    payload
+  }
+}
+
+export function setRKneeTemperature(payload) {
+  return {
+    type: NAO_SET_RKNEE_TEMPERATURE,
+    payload
+  }
+}
+
+export function getLKneeTemperature(payload) {
+  return {
+    type: NAO_GET_LKNEE_TEMPERATURE,
+    payload
+  }
+}
+
+export function setLKneeTemperature(payload) {
+  return {
+    type: NAO_SET_LKNEE_TEMPERATURE,
     payload
   }
 }

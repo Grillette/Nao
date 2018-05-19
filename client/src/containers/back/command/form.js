@@ -36,14 +36,15 @@ class CommandForm extends Component {
       }
     ];
 
+    console.log("test");
+    console.log(this.props.behaviorList);
+
     forEach(this.props.behaviorList, (behavior) => {
       options.push({
         key: behavior,
         value: behavior,
         text: behavior
       });
-      //console.log("test");
-      //console.log(this.props.behaviorList);
     });
 
     return isUndefined(this.props.current) ? (

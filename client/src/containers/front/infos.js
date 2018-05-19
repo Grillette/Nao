@@ -17,18 +17,50 @@ class Home extends Component {
       name:"tempCPU", libelle:"Température CPU", value: this.props.cpu + "°C", alert: "40°C",
     };
     let battery = {
-      name:"battery", libelle:"Niveau de la batterie", value: this.props.battery, alert: "20%",
+      name:"battery", libelle:"Niveau de la batterie", value: this.props.battery + "%", alert: "20%",
     };
-    let lfoot_weight = {
-      name:"lfootWeight", libelle:"Poids du pieds gauche", value: this.props.lfootWeight + " kg", alert: "5kg",
+    let lFoot_weight = {
+      name:"lFootWeight", libelle:"Poids du pied gauche", value: this.props.lFootWeight + " kg", alert: "5kg",
     };
-    let rfoot_weight = {
-      name: "rfootWeight", libelle:"Poids du pied droit", value: this.props.rfootWeight + " kg", alert: "5kg",
-    }
+    let rFoot_weight = {
+      name: "rFootWeight", libelle:"Poids du pied droit", value: this.props.rFootWeight + " kg", alert: "5kg",
+    };
+    let lShoulder_temp = {
+      name:"lSoulderTemperature", libelle:"Température de l'épaule gauche", value: this.props.lShoulderTemp + "°C", alert: "40°C",
+    };
+    let rShoulder_temp = {
+      name:"rShoulderTemperature", libelle:"Température de l'épaule droite", value: this.props.rShoulderTemp + "°C", alert: "40°C",
+    };
+    let lKnee_temp = {
+      name: "lKneeTemperature", libelle: "Température du genou gauche", value: this.props.lKneeTemp + "°C", alert: "40°C",
+    };
+    let rKnee_temp = {
+      name: "rKneeTemperature", libelle: "Température du genou droit", value: this.props.rKneeTemp + "°C", alert: "40°C",
+    };
+    let lElbow_temp = {
+      name: "lElbowTemperature", libelle: "Température du coude gauche", value: this.props.lElbowTemp + "°C", alert: "40°C",
+    };
+    let rElbow_temp = {
+      name: "rElbowTemperature", libelle: "Température du coude droit", value: this.props.rElbowTemp + "°C", alert: "40°C",
+    };
+    let lHip_temp = {
+      name: "lHipTemperature", libelle: "Température de la hanche gauche", value: this.props.lHipTemp + "°C", alert: "40°C",
+    };
+    let rHip_temp = {
+      name: "rHipTemperature", libelle: "Température de la hanche droite", value: this.props.rHipTemp + "°C", alert: "40°C",
+    };
     sensors.push(cpu_temp);
     sensors.push(battery);
-    sensors.push(lfoot_weight);
-    sensors.push(rfoot_weight);
+    sensors.push(lFoot_weight);
+    sensors.push(rFoot_weight);
+    sensors.push(lShoulder_temp);
+    sensors.push(rShoulder_temp);
+    sensors.push(lKnee_temp);
+    sensors.push(rKnee_temp);
+    sensors.push(lElbow_temp);
+    sensors.push(rElbow_temp);
+    sensors.push(lHip_temp);
+    sensors.push(rHip_temp);
 
 
     const columns = [
@@ -80,8 +112,16 @@ Home.propTypes = {
   processing: PropTypes.any,
   cpu: PropTypes.string,
   battery: PropTypes.string,
-  lfootWeight: PropTypes.string,
-  rfootWeight: PropTypes.string,
+  lFootWeight: PropTypes.string,
+  rFootWeight: PropTypes.string,
+  lShoulderTemp: PropTypes.string,
+  rShoulderTemp: PropTypes.string,
+  lKneeTemp: PropTypes.string,
+  rKneeTemp: PropTypes.string,
+  lElbowTemp: PropTypes.string,
+  rElbowTemp: PropTypes.string,
+  lHipTemp: PropTypes.string,
+  rHipTemp: PropTypes.string,
 };
 
 function mapStateToProps(state) { // eslint-disable-line no-unused-vars
@@ -89,8 +129,16 @@ function mapStateToProps(state) { // eslint-disable-line no-unused-vars
     robot: getRobotDefault(state),
     cpu: state.app.nao.cpu,
     battery: state.app.nao.battery,
-    lfootWeight: state.app.nao.lfootWeight,
-    rfootWeight: state.app.nao.rfootWeight,
+    lFootWeight: state.app.nao.lFootWeight,
+    rFootWeight: state.app.nao.rFootWeight,
+    lShoulderTemp: state.app.nao.lShoulderTemp,
+    rShoulderTemp: state.app.nao.rShoulderTemp,
+    lKneeTemp: state.app.nao.lKneeTemp,
+    rKneeTemp: state.app.nao.rKneeTemp,
+    lElbowTemp: state.app.nao.lElbowTemp,
+    rElbowTemp: state.app.nao.rElbowTemp,
+    lHipTemp: state.app.nao.lHipTemp,
+    rHipTemp: state.app.nao.rHipTemp,
   };
 }
 

@@ -24,6 +24,22 @@ import {
   NAO_GET_LFOOT_WEIGHT,
   NAO_SET_RFOOT_WEIGHT,
   NAO_GET_RFOOT_WEIGHT,
+  NAO_SET_LSHOULDER_TEMPERATURE,
+  NAO_GET_LSHOULDER_TEMPERATURE,
+  NAO_SET_RSHOULDER_TEMPERATURE,
+  NAO_GET_RSHOULDER_TEMPERATURE,
+  NAO_SET_LKNEE_TEMPERATURE,
+  NAO_GET_LKNEE_TEMPERATURE,
+  NAO_SET_RKNEE_TEMPERATURE,
+  NAO_GET_RKNEE_TEMPERATURE,
+  NAO_SET_LELBOW_TEMPERATURE,
+  NAO_GET_LELBOW_TEMPERATURE,
+  NAO_SET_RELBOW_TEMPERATURE,
+  NAO_GET_RELBOW_TEMPERATURE,
+  NAO_SET_LHIP_TEMPERATURE,
+  NAO_GET_LHIP_TEMPERATURE,
+  NAO_SET_RHIP_TEMPERATURE,
+  NAO_GET_RHIP_TEMPERATURE,
   NAO_SHUTDOWN,
 
   NOTIFICATION_ADD,
@@ -56,14 +72,54 @@ function * connect(action) {
     console.log("cpu_temp : " + cpu_temp);
 
     // get LFoot weight
-    let lfoot_weight = yield call(Nao.getLFootWeight, null);
-    yield put ({type: NAO_SET_LFOOT_WEIGHT, payload: lfoot_weight.toString().substring(0, 5)});
-    console.log("LFoot_temps : " + lfoot_weight);
+    let lFoot_weight = yield call(Nao.getLFootWeight, null);
+    yield put ({type: NAO_SET_LFOOT_WEIGHT, payload: lFoot_weight.toString().substring(0, 5)});
+    console.log("LFoot_temps : " + lFoot_weight);
 
     // get RFoot weight
-    let rfoot_weight = yield call(Nao.getRFootWeight, null);
-    yield put ({type: NAO_SET_RFOOT_WEIGHT, payload: rfoot_weight.toString().substring(0, 5)});
-    console.log("RFoot_temps : " + rfoot_weight);
+    let rFoot_weight = yield call(Nao.getRFootWeight, null);
+    yield put ({type: NAO_SET_RFOOT_WEIGHT, payload: rFoot_weight.toString().substring(0, 5)});
+    console.log("RFoot_temps : " + rFoot_weight);
+
+    // get LShoulder temperature
+    let lShoulder_temp = yield call(Nao.getLShoulderTemperature, null);
+    yield put ({type: NAO_SET_LSHOULDER_TEMPERATURE, payload: lShoulder_temp.toString()});
+    console.log("LShoulder_temp : " + lShoulder_temp);
+
+    // get RShoulder temperature
+    let rShoulder_temp = yield call(Nao.getRShoulderTemperature, null);
+    yield put ({type: NAO_SET_RSHOULDER_TEMPERATURE, payload: rShoulder_temp.toString()});
+    console.log("RShoulder_temp : " + rShoulder_temp);
+
+    // get LKnee temperature
+    let lKnee_temp = yield call(Nao.getLKneeTemperature, null);
+    yield put ({type: NAO_SET_LKNEE_TEMPERATURE, payload: lKnee_temp.toString()});
+    console.log("LKnee_temp : " + lKnee_temp);
+
+    // get RKnee temperature
+    let rKnee_temp = yield call(Nao.getRKneeTemperature, null);
+    yield put ({type: NAO_SET_RKNEE_TEMPERATURE, payload: rKnee_temp.toString()});
+    console.log("RKnee_temp : " + rKnee_temp);
+
+    // get LElbow temperature
+    let lElbow_temp = yield call(Nao.getLElbowTemperature, null);
+    yield put ({type: NAO_SET_LELBOW_TEMPERATURE, payload: lElbow_temp.toString()});
+    console.log("LElbow_temp : " + lElbow_temp);
+
+    // get RElbow temperature
+    let rElbow_temp = yield call(Nao.getRElbowTemperature, null);
+    yield put ({type: NAO_SET_RELBOW_TEMPERATURE, payload: rElbow_temp.toString()});
+    console.log("RElbow_temp : " + rElbow_temp);
+
+    // get LHip temperature
+    let lHip_temp = yield call(Nao.getLHipTemperature, null);
+    yield put ({type: NAO_SET_LHIP_TEMPERATURE, payload: lHip_temp.toString()});
+    console.log("LHip_temp : " + lHip_temp);
+
+    // get RHip temperature
+    let rHip_temp = yield call(Nao.getRHipTemperature, null);
+    yield put ({type: NAO_SET_RHIP_TEMPERATURE, payload: rHip_temp.toString()});
+    console.log("RHip_temp : " + rHip_temp);
 
     let version = yield call(Nao.getSystemVersion, null);
     yield put({type: NAO_SET_SYSTEM_VERSION, payload: version.toString()});
@@ -222,6 +278,86 @@ function * getRFootWeight() {
   }
 }
 
+function * getLShoulderTemperature() {
+  try{
+    let data = yield call(Nao.getLShoulderTemperature, null);
+    if (data.hasOwnProperty('error')) throw new Error(data.error);
+    yield put({type: NAO_SET_LSHOULDER_TEMPERATURE, payload: data.toString()});
+  } catch (e) {
+    yield put({type: NOTIFICATION_ADD, payload: {id: Math.random(), message : e.message, type : 'negative'}});
+  }
+}
+
+function * getRShoulderTemperature() {
+  try{
+    let data = yield call(Nao.getRShoulderTemperature, null);
+    if (data.hasOwnProperty('error')) throw new Error(data.error);
+    yield put({type: NAO_SET_RSHOULDER_TEMPERATURE, payload: data.toString()});
+  } catch (e) {
+    yield put({type: NOTIFICATION_ADD, payload: {id: Math.random(), message : e.message, type : 'negative'}});
+  }
+}
+
+function * getLKneeTemperature() {
+  try{
+    let data = yield call(Nao.getLKneeTemperature, null);
+    if (data.hasOwnProperty('error')) throw new Error(data.error);
+    yield put({type: NAO_SET_LKNEE_TEMPERATURE, payload: data.toString()});
+  } catch (e) {
+    yield put({type: NOTIFICATION_ADD, payload: {id: Math.random(), message : e.message, type : 'negative'}});
+  }
+}
+
+function * getRKneeTemperature() {
+  try{
+    let data = yield call(Nao.getRKneeTemperature, null);
+    if (data.hasOwnProperty('error')) throw new Error(data.error);
+    yield put({type: NAO_SET_RKNEE_TEMPERATURE, payload: data.toString()});
+  } catch (e) {
+    yield put({type: NOTIFICATION_ADD, payload: {id: Math.random(), message : e.message, type : 'negative'}});
+  }
+}
+
+function * getLElbowTemperature() {
+  try{
+    let data = yield call(Nao.getLElbowTemperature, null);
+    if (data.hasOwnProperty('error')) throw new Error(data.error);
+    yield put({type: NAO_SET_LELBOW_TEMPERATURE, payload: data.toString()});
+  } catch (e) {
+    yield put({type: NOTIFICATION_ADD, payload: {id: Math.random(), message : e.message, type : 'negative'}});
+  }
+}
+
+function * getRElbowTemperature() {
+  try{
+    let data = yield call(Nao.getRElbowTemperature, null);
+    if (data.hasOwnProperty('error')) throw new Error(data.error);
+    yield put({type: NAO_SET_RELBOW_TEMPERATURE, payload: data.toString()});
+  } catch (e) {
+    yield put({type: NOTIFICATION_ADD, payload: {id: Math.random(), message : e.message, type : 'negative'}});
+  }
+}
+
+function * getLHipTemperature() {
+  try{
+    let data = yield call(Nao.getLHipTemperature, null);
+    if (data.hasOwnProperty('error')) throw new Error(data.error);
+    yield put({type: NAO_SET_LHIP_TEMPERATURE, payload: data.toString()});
+  } catch (e) {
+    yield put({type: NOTIFICATION_ADD, payload: {id: Math.random(), message : e.message, type : 'negative'}});
+  }
+}
+
+function * getRHipTemperature() {
+  try{
+    let data = yield call(Nao.getRHipTemperature, null);
+    if (data.hasOwnProperty('error')) throw new Error(data.error);
+    yield put({type: NAO_SET_RHIP_TEMPERATURE, payload: data.toString()});
+  } catch (e) {
+    yield put({type: NOTIFICATION_ADD, payload: {id: Math.random(), message : e.message, type : 'negative'}});
+  }
+}
+
 function * NaoSaga() {
   yield [
     takeLatest(NAO_CONNECT, connect),
@@ -237,6 +373,14 @@ function * NaoSaga() {
     takeLatest(NAO_GET_CPU_TEMPERATURE,getCPUTemperature),
     takeLatest(NAO_GET_LFOOT_WEIGHT, getLFootWeight),
     takeLatest(NAO_GET_RFOOT_WEIGHT, getRFootWeight),
+    takeLatest(NAO_GET_LSHOULDER_TEMPERATURE, getLShoulderTemperature),
+    takeLatest(NAO_GET_RSHOULDER_TEMPERATURE, getRShoulderTemperature),
+    takeLatest(NAO_GET_LKNEE_TEMPERATURE, getLKneeTemperature),
+    takeLatest(NAO_GET_RKNEE_TEMPERATURE, getRKneeTemperature),
+    takeLatest(NAO_GET_LELBOW_TEMPERATURE, getLElbowTemperature),
+    takeLatest(NAO_GET_RELBOW_TEMPERATURE, getRElbowTemperature),
+    takeLatest(NAO_GET_LHIP_TEMPERATURE, getLHipTemperature),
+    takeLatest(NAO_GET_RHIP_TEMPERATURE, getRHipTemperature),
     takeLatest(NAO_SHUTDOWN, shutdown),
   ];
 }
