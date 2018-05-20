@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `command` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `id_robot` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `description` text,
@@ -41,7 +41,7 @@ CREATE TABLE `command` (
 --
 
 CREATE TABLE `peripheral` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(255) DEFAULT NULL,
   `description` text,
   `mac_address` varchar(255) DEFAULT NULL,
@@ -64,7 +64,7 @@ INSERT INTO `peripheral` (`id`, `name`, `description`, `mac_address`, `ip_addres
 --
 
 CREATE TABLE `robot` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(255) DEFAULT NULL,
   `mac_address` varchar(255) DEFAULT NULL,
   `ip_address` varchar(255) DEFAULT NULL,
@@ -87,7 +87,7 @@ INSERT INTO `robot` (`id`, `name`, `mac_address`, `ip_address`, `color`, `defaul
 --
 
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `username` varchar(255) DEFAULT NULL,
   `password` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
