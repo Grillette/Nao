@@ -10,7 +10,6 @@ import Login from './containers/layout/login';
 
 import LayoutFront from './containers/layout/front';
 import Main from './containers/front/home';
-import Doc from './containers/front/doc';
 
 import LayoutBack from './containers/layout/back';
 import MainBack from './containers/back';
@@ -41,7 +40,7 @@ import 'react-table/react-table.css';
 import './assets/style/app.css';
 
 class RouteComponent extends React.Component {
-  
+
   render() {
     return (
       <Provider store={store}>
@@ -49,12 +48,11 @@ class RouteComponent extends React.Component {
           <Route path="/" component={LayoutFront} >
             <IndexRoute component={Main} />
             <Route path="/home" component={Main} />
-            <Route path="/doc" component={Doc} />
           </Route>
           <Route path="/login" component={Login} />
           <Route path="/admin" component={LayoutBack} >
             <IndexRoute component={MainBack} />
-            
+
             <Route path="robot" component={RobotHome} />
             <Route path="robot/create" component={RobotCreate} />
             <Route path="robot/update/:id" component={RobotUpdate} />
@@ -63,12 +61,12 @@ class RouteComponent extends React.Component {
             <Route path="robot/:idRobot/command/create" component={CommandCreate} />
             <Route path="robot/:idRobot/command/update/:id" component={CommandUpdate} />
             <Route path="robot/:idRobot/command/delete/:id" component={CommandDelete} />
-            
+
             <Route path="peripheral" component={PeripheralHome} />
             <Route path="peripheral/create" component={PeripheralCreate} />
             <Route path="peripheral/update/:id" component={PeripheralUpdate} />
             <Route path="peripheral/delete/:id" component={PeripheralDelete} />
-  
+
             <Route path="user" component={UserHome} />
             <Route path="user/create" component={UserCreate} />
             <Route path="user/delete/:id" component={UserDelete} />

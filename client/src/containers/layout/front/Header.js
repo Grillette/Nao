@@ -76,7 +76,8 @@ class HeaderContainer extends Component {
           </Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item><Button as={Link} to="admin" inverted icon="wrench"/></Menu.Item>
-            <Menu.Item><Button as={Link} to="doc" inverted icon="book"/></Menu.Item>
+            <a href="../assets/Manuel_utilisation.pdf" className="doc" target = "_blank"><Menu.Item><Button inverted icon="book"/></Menu.Item></a>
+
           </Menu.Menu>
         </Menu>
       </div>
