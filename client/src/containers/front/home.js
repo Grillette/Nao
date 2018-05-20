@@ -10,19 +10,18 @@ import Pas from './pas';
 import Action from './action';
 import Infos from './infos';
 import Robot from './robot';
-import NaoApi from '../../services/naoClass';
 
 class Home extends Component {
-  
+
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
   }
-  
+
   handleChange(mode) {
     this.props.actions.ModeSet(mode);
   }
-  
+
   render() {
       let html = null;
       switch (this.props.mode) {
@@ -40,7 +39,7 @@ class Home extends Component {
           html = (<Action/>);
           break;
       }
-  
+
       return (
         <Container fluid>
           <Menu attached='top' tabular>
