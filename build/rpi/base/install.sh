@@ -9,18 +9,21 @@ if [ $? -eq "0" ]; then
     if [ $? -eq "0" ]; then
 
         sudo apt update && sudo apt upgrade
-        sudo apt install git \
+        sudo apt install -y git \
                     vim \
                     apt-transport-https \
                     ca-certificates \
                     gnupg2 \
                     wget \
                     software-properties-common \
-                    ssh
+                    ssh \
+                    lsof \
+                    linux-headers-4.9.0-9-all \
+                    raspberrypi-kernel-headers
 
         echo "### INSTALL REPOSITORY ###"
 
-        git clone https://github.com/Grillette/Nao.git /home/pi
+        git clone https://github.com/Grillette/Nao.git
         cd /home/pi/Nao/build/rpi/base
         sudo cp sshd_config /etc/ssh
         sudo cp ascii.txt /etc/motd
@@ -34,8 +37,9 @@ if [ $? -eq "0" ]; then
         echo "deb [arch=armhf] https://download.docker.com/linux/debian \
              $(lsb_release -cs) stable" | \
             sudo tee /etc/apt/sources.list.d/docker.list
-        sudo apt-get update && sudo apt-get install docker-ce
+        sudo apt-get update && sudo apt-get install -y docker-ce
         sudo usermod -aG docker pi
+        sudo newgrp docker
         sudo systemctl enable docker.service
 
 
@@ -50,16 +54,8 @@ if [ $? -eq "0" ]; then
         sudo cp dnsmasq.conf /etc
         sudo sed -i -e 's/80/4242/g' /etc/lighttpd/lighttpd.conf
         sudo cp hostapd.conf /etc
-
-
-        echo "### INSTALL BIND9 ###"
-
-        sudo apt-get install bind9 bind9utils dnsutils
-        sudo cp named.conf.local /etc/bind
-        sudo iiil /etc/bind
-        sudo db.0.0.10.in-addr.arpa /etc/bind
-        sudo systemctl enable bind9-resolvconf.service
-        sudo systemctl enable bind9-pkcs11.service
+        sudo systemctl enable hostapd.service
+        sudo systemctl enable dnsmasq.service
 
 
         echo "### INSTALL NAOSERVER ###"
@@ -69,7 +65,7 @@ if [ $? -eq "0" ]; then
 
         echo "### REBOOTING ###"
 
-        sudo reboot
+        #sudo reboot
 
     else
         echo "You need to have internet access ..."
