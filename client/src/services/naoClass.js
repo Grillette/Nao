@@ -40,7 +40,6 @@ class NAO {
     this.getInProgress = this.getInProgress.bind(this);
     this.setInProgress = this.setInProgress.bind(this);
     this.getCPUTemperature = this.getCPUTemperature.bind(this);
-    this.getRunningBehaviors = this.getRunningBehaviors.bind(this);
   }
 
   // /!\ un reject doit forcement retourner une exception ! new Error('message');
@@ -236,6 +235,7 @@ class NAO {
     });
   }
 
+  // Appel à l'API pour le mode Rasta du robot
   rasta(data) {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -363,30 +363,7 @@ class NAO {
     return this.data('Device/SubDeviceList/Head/Temperature/Sensor/Value');
   }
 
-  // Liste des actions en cours
-  getRunningBehaviors() {
-    console.log("PUTE");
-    return new Promise((resolve, reject) => {
-      if (!this.connected) {
-        resolve({
-          error: 'Le robot n\'est pas connecté !'
-        })
-      }
-      this.qis.service('ALBehaviorManager').then(
-        (ALSystem) => {
-          ALSystem.getRunningBehaviors().done((data) => {
-            resolve(data);
-          });
-        },
-        () => {
-          resolve({
-            error: 'Le robot n\'est pas connecté !'
-          });
-        }
-      );
-    });
-  }
-
+  // Appel l'API afin de déplacer pas à pas le robot
   move(x,y,theta) {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
@@ -411,6 +388,7 @@ class NAO {
     });
   }
 
+  // Appel l'API afin de bouger la tête sur la l'axe des x et y
   moveHead(mode,x,y) {
     return new Promise((resolve, reject) => {
       if (!this.connected) {
