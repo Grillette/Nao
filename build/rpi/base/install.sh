@@ -17,7 +17,9 @@ if [ $? -eq "0" ]; then
                     wget \
                     software-properties-common \
                     ssh \
-                    lsof
+                    lsof \
+                    linux-headers-4.9.0-9-all \
+                    raspberrypi-kernel-headers
 
         echo "### INSTALL REPOSITORY ###"
 
@@ -63,7 +65,7 @@ if [ $? -eq "0" ]; then
 
         echo "### REBOOTING ###"
 
-        sudo reboot
+        #sudo reboot
 
     else
         echo "You need to have internet access ..."
