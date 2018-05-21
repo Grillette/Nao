@@ -44,6 +44,9 @@ export const NAO_SET_RKNEE_TEMPERATURE = 'NAO_SET_RKNEE_TEMPERATURE';
 export const NAO_GET_LKNEE_TEMPERATURE = 'NAO_GET_LKNEE_TEMPERATURE';
 export const NAO_SET_LKNEE_TEMPERATURE = 'NAO_SET_LKNEE_TEMPERATURE';
 
+export const NAO_GET_RUNNING_BEHAVIORS = 'NAO_GET_RUNNING_BEHAVIORS';
+// export const NAO_SET_RUNNING_BEHAVIORS = 'NAO_SET_RUNNING_BEHAVIORS';
+
 export const NAO_GET_DATA = 'NAO_GET_DATA';
 export const NAO_GET_DATA_RECIEVE = 'NAO_GET_DATA_RECIEVE';
 
@@ -297,6 +300,21 @@ export function setLKneeTemperature(payload) {
     payload
   }
 }
+
+export function getRunningBehaviors(payload) {
+  return {
+    type: NAO_GET_RUNNING_BEHAVIORS,
+    payload
+  }
+}
+
+// export function setRunningBehaviors(payload) {
+//   return {
+//     type: NAO_SET_RUNNING_BEHAVIORS,
+//     payload
+//   }
+// }
+
 
 export function shutdown() {
   return {

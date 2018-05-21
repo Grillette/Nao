@@ -102,6 +102,8 @@ export {
   NAO_GET_LSHOULDER_TEMPERATURE,
   NAO_SET_RSHOULDER_TEMPERATURE,
   NAO_GET_RSHOULDER_TEMPERATURE,
+  NAO_GET_RUNNING_BEHAVIORS,
+  NAO_SET_RUNNING_BEHAVIORS,
 
   // ACTION CREATOR
   connect as NaoConnect,
@@ -126,7 +128,7 @@ export {
   getLHipTemperature as NAOGetLHipTemperature,
   setLHipTemperature as NAOSetLHipTemperature,
   getRHipTemperature as NAOGetRHipTemperature,
-  setRHipTemperature as NAOSetRhipTemperature,
+  setRHipTemperature as NAOSetRSipTemperature,
   getLElbowTemperature as NAOGetLElbowTemperature,
   setLElbowTemperature as NAOSetLElbowTemperature,
   getRElbowTemperature as NAOGetRElbowTemperature,
@@ -134,11 +136,13 @@ export {
   getLShoulderTemperature as NAOGetLShoulderTemperature,
   setLShoulderTemperature as NAOSetLShoulderTemperature,
   getRShoulderTemperature as NAOGetRShoulderTemperature,
-  setRShoulderTemperature as NAOSetRshoulderTemperature,
+  setRShoulderTemperature as NAOSetRShoulderTemperature,
   getLKneeTemperature as NAOGetLKneeTemperature,
   setLKneeTemperature as NAOSetLKneeTemperature,
   getRKneeTemperature as NAOGetRKneeTemperature,
   setRKneeTemperature as NAOSetRKneeTemperature,
+  getRunningBehaviors as NAOGetRunningBehaviors,
+  setRunningBehaviors as NAOSetRunningBehaviors,
   shutdown as NaoShutdown
 } from './common/nao';
 

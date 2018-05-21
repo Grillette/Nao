@@ -9,34 +9,58 @@ import BehaviorInProgress from '../layout/BahaviorInProgress';
 import { CommandGet, NaoBehavior } from '../../actions';
 import Command from '../../components/front/Command';
 import getCommandByRobotId from '../../selectors/getCommandByRobotId';
+import forEach from "lodash/forEach";
 
 class Home extends Component {
-  
+
   constructor() {
     super();
-    
+
     this.onClickCommand = this.onClickCommand.bind(this);
   }
-  
+
   componentWillMount() {
     this.props.actions.CommandGet();
   }
-  
+
   onClickCommand(action) {
     this.props.actions.NaoBehavior(action);
   }
-  
+
   render() {
     let commandHtml = this.props.commands.map( (command) => {
       return <Command key={command.id} data={command} onClick={this.onClickCommand}/>;
     });
-    
-    return (
-      <Container fluid>
-        <BehaviorInProgress />
-        {commandHtml}
-      </Container>
-    );
+
+    let options = [
+      {
+        key: 'test',
+        value: 'test',
+        text: 'test',
+      }
+    ];
+
+    console.log("runningBehaviors");
+    console.log(this.props.runningBehaviors);
+
+    forEach(this.props.runningBehaviors, (behavior) => {
+      options.push({
+        key: behavior,
+        value: behavior,
+        text: behavior
+      });
+    });
+
+    // Si une action est déjà en cours d'exécution on affiche la pop up
+    // Tester getRunningBehaviors si la liste renvoyée n'est pas nul alors une action est en cours
+    console.log("runningBehaviors");
+    console.log(this.props.runningBehaviors);
+      return (
+        <Container fluid>
+          <BehaviorInProgress />
+          {commandHtml}
+        </Container>
+      );
   }
 }
 
@@ -44,13 +68,15 @@ class Home extends Component {
 Home.propTypes = {
   actions: PropTypes.shape({}),
   mode: PropTypes.any,
-  commands: PropTypes.any
+  commands: PropTypes.any,
+  runningBehaviors: PropTypes.any
 };
 
 function mapStateToProps(state) { // eslint-disable-line no-unused-vars
   return {
     mode: state.app.mode,
-    commands: getCommandByRobotId(state.app.default)(state)
+    commands: getCommandByRobotId(state.app.default)(state),
+    runningBehaviors: state.entities.runningBehaviors,
   };
 }
 
