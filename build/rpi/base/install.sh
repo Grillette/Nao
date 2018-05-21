@@ -16,7 +16,8 @@ if [ $? -eq "0" ]; then
                     gnupg2 \
                     wget \
                     software-properties-common \
-                    ssh
+                    ssh \
+                    lsof
 
         echo "### INSTALL REPOSITORY ###"
 
@@ -50,16 +51,6 @@ if [ $? -eq "0" ]; then
         sudo cp dnsmasq.conf /etc
         sudo sed -i -e 's/80/4242/g' /etc/lighttpd/lighttpd.conf
         sudo cp hostapd.conf /etc
-
-
-        echo "### INSTALL BIND9 ###"
-
-        sudo apt-get install bind9 bind9utils dnsutils
-        sudo cp named.conf.local /etc/bind
-        sudo iiil /etc/bind
-        sudo db.0.0.10.in-addr.arpa /etc/bind
-        sudo systemctl enable bind9-resolvconf.service
-        sudo systemctl enable bind9-pkcs11.service
 
 
         echo "### INSTALL NAOSERVER ###"

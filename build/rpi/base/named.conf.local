@@ -1,8 +1,0 @@
-zone "iiil" {
-        type master;
-        file "/etc/bind/iiil";
-  };
-zone "0.0.10.in-addr.arpa" {
-        type master;
-        file "/etc/bind/db.0.0.10.in-addr.arpa";
-  };
