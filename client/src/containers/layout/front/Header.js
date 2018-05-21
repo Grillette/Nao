@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Menu, Icon, Button, Confirm, Header } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
-import { NaoShutdown } from '../../../actions';
+import {BehaviorSetLoading, NaoShutdown, NaoStopAllBehavior} from '../../../actions';
 
 class HeaderContainer extends Component {
 
@@ -17,6 +17,7 @@ class HeaderContainer extends Component {
     this.handleCancel = this.handleCancel.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
     this.handleClickShutdown = this.handleClickShutdown.bind(this);
+    this.stop = this.stop.bind(this);
   }
 
   handleClickShutdown() {
@@ -36,6 +37,11 @@ class HeaderContainer extends Component {
       shutdown: false
     });
     this.props.actions.NaoShutdown();
+  }
+
+  stop() {
+    this.props.actions.BehaviorSetLoading(false);
+    this.props.actions.NaoStopAllBehavior();
   }
 
 
@@ -74,10 +80,12 @@ class HeaderContainer extends Component {
               confirmButton="Oui"
             />
           </Menu.Item>
+          <Menu.Item>
+            <Button icon='window close' labelPosition='right' content="Arrêter l'action" onClick={this.stop} disabled={!this.props.processing} negative={this.props.processing} />
+          </Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item><Button as={Link} to="admin" inverted icon="wrench"/></Menu.Item>
             <a href="../assets/Manuel_utilisation.pdf" className="doc" target = "_blank"><Menu.Item><Button inverted icon="book"/></Menu.Item></a>
-
           </Menu.Menu>
         </Menu>
       </div>
@@ -88,17 +96,21 @@ class HeaderContainer extends Component {
 HeaderContainer.propTypes = {
   actions: PropTypes.shape({}),
   battery: PropTypes.string,
+  processing: PropTypes.string,
 };
 
 function mapStateToProps(state) { // eslint-disable-line no-unused-vars
   return {
-    battery: state.app.nao.battery
+    battery: state.app.nao.battery,
+    processing: state.app.nao.processing,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-    NaoShutdown
+    NaoShutdown,
+    BehaviorSetLoading,
+    NaoStopAllBehavior
   };
   return { actions: bindActionCreators(actions, dispatch) };
 }

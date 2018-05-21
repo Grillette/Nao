@@ -14,7 +14,7 @@ class Home extends Component {
     let sensors = [];
     //console.log(this.props);
     let cpu_temp = {
-      name:"tempCPU", libelle:"Température CPU", value: this.props.cpu + "°C", alert: "40°C",
+      name:"tempCPU", libelle:"Température CPU", value: this.props.cpu + "°C", alert: "90°C",
     };
     let battery = {
       name:"battery", libelle:"Niveau de la batterie", value: this.props.battery + "%", alert: "20%",
@@ -26,28 +26,28 @@ class Home extends Component {
       name: "rFootWeight", libelle:"Poids du pied droit", value: this.props.rFootWeight + " kg", alert: "5kg",
     };
     let lShoulder_temp = {
-      name:"lSoulderTemperature", libelle:"Température de l'épaule gauche", value: this.props.lShoulderTemp + "°C", alert: "40°C",
+      name:"lSoulderTemperature", libelle:"Température de l'épaule gauche", value: this.props.lShoulderTemp + "°C", alert: "60°C",
     };
     let rShoulder_temp = {
-      name:"rShoulderTemperature", libelle:"Température de l'épaule droite", value: this.props.rShoulderTemp + "°C", alert: "40°C",
+      name:"rShoulderTemperature", libelle:"Température de l'épaule droite", value: this.props.rShoulderTemp + "°C", alert: "60°C",
     };
     let lKnee_temp = {
-      name: "lKneeTemperature", libelle: "Température du genou gauche", value: this.props.lKneeTemp + "°C", alert: "40°C",
+      name: "lKneeTemperature", libelle: "Température du genou gauche", value: this.props.lKneeTemp + "°C", alert: "60°C",
     };
     let rKnee_temp = {
-      name: "rKneeTemperature", libelle: "Température du genou droit", value: this.props.rKneeTemp + "°C", alert: "40°C",
+      name: "rKneeTemperature", libelle: "Température du genou droit", value: this.props.rKneeTemp + "°C", alert: "60°C",
     };
     let lElbow_temp = {
-      name: "lElbowTemperature", libelle: "Température du coude gauche", value: this.props.lElbowTemp + "°C", alert: "40°C",
+      name: "lElbowTemperature", libelle: "Température du coude gauche", value: this.props.lElbowTemp + "°C", alert: "60°C",
     };
     let rElbow_temp = {
-      name: "rElbowTemperature", libelle: "Température du coude droit", value: this.props.rElbowTemp + "°C", alert: "40°C",
+      name: "rElbowTemperature", libelle: "Température du coude droit", value: this.props.rElbowTemp + "°C", alert: "60°C",
     };
     let lHip_temp = {
-      name: "lHipTemperature", libelle: "Température de la hanche gauche", value: this.props.lHipTemp + "°C", alert: "40°C",
+      name: "lHipTemperature", libelle: "Température de la hanche gauche", value: this.props.lHipTemp + "°C", alert: "60°C",
     };
     let rHip_temp = {
-      name: "rHipTemperature", libelle: "Température de la hanche droite", value: this.props.rHipTemp + "°C", alert: "40°C",
+      name: "rHipTemperature", libelle: "Température de la hanche droite", value: this.props.rHipTemp + "°C", alert: "60°C",
     };
     sensors.push(cpu_temp);
     sensors.push(battery);

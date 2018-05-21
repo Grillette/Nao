@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Menu,Segment, Container } from 'semantic-ui-react';
 
 import BehaviorInProgress from '../layout/BahaviorInProgress';
-import { CommandGet, NaoBehavior } from '../../actions';
+import { CommandGet, NaoBehavior} from '../../actions';
 import Command from '../../components/front/Command';
 import getCommandByRobotId from '../../selectors/getCommandByRobotId';
 import forEach from "lodash/forEach";
@@ -25,39 +25,22 @@ class Home extends Component {
 
   onClickCommand(action) {
     this.props.actions.NaoBehavior(action);
+    console.log("processing");
+    console.log(this.props.processing);
   }
 
   render() {
     let commandHtml = this.props.commands.map( (command) => {
-      return <Command key={command.id} data={command} onClick={this.onClickCommand}/>;
-    });
-
-    let options = [
-      {
-        key: 'test',
-        value: 'test',
-        text: 'test',
-      }
-    ];
-
-    console.log("runningBehaviors");
-    console.log(this.props.runningBehaviors);
-
-    forEach(this.props.runningBehaviors, (behavior) => {
-      options.push({
-        key: behavior,
-        value: behavior,
-        text: behavior
-      });
+      return <Command key={command.id} data={command} onClick={this.onClickCommand} />;
     });
 
     // Si une action est déjà en cours d'exécution on affiche la pop up
     // Tester getRunningBehaviors si la liste renvoyée n'est pas nul alors une action est en cours
-    console.log("runningBehaviors");
-    console.log(this.props.runningBehaviors);
+    console.log("not processing");
+    console.log(this.props.processing);
+
       return (
         <Container fluid>
-          <BehaviorInProgress />
           {commandHtml}
         </Container>
       );
@@ -69,7 +52,8 @@ Home.propTypes = {
   actions: PropTypes.shape({}),
   mode: PropTypes.any,
   commands: PropTypes.any,
-  runningBehaviors: PropTypes.any
+  runningBehaviors: PropTypes.any,
+  processing: PropTypes.any,
 };
 
 function mapStateToProps(state) { // eslint-disable-line no-unused-vars
@@ -77,13 +61,14 @@ function mapStateToProps(state) { // eslint-disable-line no-unused-vars
     mode: state.app.mode,
     commands: getCommandByRobotId(state.app.default)(state),
     runningBehaviors: state.entities.runningBehaviors,
+    processing: state.app.nao.processing
   };
 }
 
 function mapDispatchToProps(dispatch) {
   const actions = {
     CommandGet,
-    NaoBehavior
+    NaoBehavior,
   };
   return { actions: bindActionCreators(actions, dispatch) };
 }

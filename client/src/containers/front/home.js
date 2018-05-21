@@ -45,7 +45,6 @@ class Home extends Component {
           <Menu attached='top' tabular>
             <Menu.Item name='pasapas' active={this.props.mode === 'pas'} content="Controle pas à pas" onClick={() => this.handleChange('pas')}/>
             <Menu.Item name='action' active={this.props.mode === 'action'} content="Actions" onClick={() => this.handleChange('action')}/>
-            <Menu.Item name='action' active={this.props.mode === 'robot'} content="Changer de robot" onClick={() => this.handleChange('robot')}/>
             <Menu.Item name='infos' active={this.props.mode === 'infos'} content="Infos" onClick={() => this.handleChange('infos')}/>
           </Menu>
           <Segment attached='bottom'>
