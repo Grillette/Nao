@@ -11,7 +11,10 @@ import {
   USER_GET_RECIEVE,
   USER_RESET,
 
-  NAO_GET_BEHAVIOR_LIST_RECIEVE
+  NAO_GET_BEHAVIOR_LIST_RECIEVE,
+
+  NAO_GET_RUNNING_BEHAVIORS,
+  NAO_SET_RUNNING_BEHAVIORS,
 } from '../actions';
 
 const initialState = {
@@ -19,7 +22,8 @@ const initialState = {
   peripherals: {},
   commands: {},
   users: {},
-  behaviorList: {}
+  behaviorList: {},
+  runningBehaviors: {},
 };
 
 export default function (state = initialState, action) {
@@ -71,6 +75,16 @@ export default function (state = initialState, action) {
 
     case USER_RESET:
       nextState.users = {};
+      return nextState;
+      break;
+
+    case NAO_GET_RUNNING_BEHAVIORS:
+      nextState.runningBehaviors = action.payload;
+      return nextState;
+      break;
+
+    case NAO_SET_RUNNING_BEHAVIORS:
+      nextState.runningBehaviors = action.payload;
       return nextState;
       break;
 

@@ -10,7 +10,7 @@ class NAO {
     this.ip = null;
     this.inprogress = false;
 
-    // merci javascript :') Obligé de bind all !
+    // binding
     this.init = this.init.bind(this);
     this.shutdown = this.shutdown.bind(this);
     this.reboot = this.reboot.bind(this);
@@ -40,6 +40,7 @@ class NAO {
     this.getInProgress = this.getInProgress.bind(this);
     this.setInProgress = this.setInProgress.bind(this);
     this.getCPUTemperature = this.getCPUTemperature.bind(this);
+    this.getRunningBehaviors = this.getRunningBehaviors.bind(this);
   }
 
   // /!\ un reject doit forcement retourner une exception ! new Error('message');
@@ -360,6 +361,30 @@ class NAO {
   // CPU Temperature
   getCPUTemperature() {
     return this.data('Device/SubDeviceList/Head/Temperature/Sensor/Value');
+  }
+
+  // Liste des actions en cours
+  getRunningBehaviors() {
+    console.log("PUTE");
+    return new Promise((resolve, reject) => {
+      if (!this.connected) {
+        resolve({
+          error: 'Le robot n\'est pas connecté !'
+        })
+      }
+      this.qis.service('ALBehaviorManager').then(
+        (ALSystem) => {
+          ALSystem.getRunningBehaviors().done((data) => {
+            resolve(data);
+          });
+        },
+        () => {
+          resolve({
+            error: 'Le robot n\'est pas connecté !'
+          });
+        }
+      );
+    });
   }
 
   move(x,y,theta) {
