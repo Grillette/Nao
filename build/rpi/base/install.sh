@@ -9,7 +9,7 @@ if [ $? -eq "0" ]; then
     if [ $? -eq "0" ]; then
 
         sudo apt update && sudo apt upgrade
-        sudo apt install git \
+        sudo apt install -y git \
                     vim \
                     apt-transport-https \
                     ca-certificates \
@@ -21,7 +21,7 @@ if [ $? -eq "0" ]; then
 
         echo "### INSTALL REPOSITORY ###"
 
-        git clone https://github.com/Grillette/Nao.git /home/pi
+        git clone https://github.com/Grillette/Nao.git
         cd /home/pi/Nao/build/rpi/base
         sudo cp sshd_config /etc/ssh
         sudo cp ascii.txt /etc/motd
@@ -35,8 +35,9 @@ if [ $? -eq "0" ]; then
         echo "deb [arch=armhf] https://download.docker.com/linux/debian \
              $(lsb_release -cs) stable" | \
             sudo tee /etc/apt/sources.list.d/docker.list
-        sudo apt-get update && sudo apt-get install docker-ce
+        sudo apt-get update && sudo apt-get install -y docker-ce
         sudo usermod -aG docker pi
+        sudo newgrp docker
         sudo systemctl enable docker.service
 
 
@@ -51,6 +52,8 @@ if [ $? -eq "0" ]; then
         sudo cp dnsmasq.conf /etc
         sudo sed -i -e 's/80/4242/g' /etc/lighttpd/lighttpd.conf
         sudo cp hostapd.conf /etc
+        sudo systemctl enable hostapd.service
+        sudo systemctl enable dnsmasq.service
 
 
         echo "### INSTALL NAOSERVER ###"
