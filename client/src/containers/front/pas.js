@@ -91,6 +91,8 @@ class Home extends Component {
                 </Grid>
               </Grid.Column>
               <Grid.Column>
+              </Grid.Column>
+              <Grid.Column>
                 <Header>Déplacement Tête</Header>
                 <Grid textAlign="center" columns='three' stretched>
                   <Grid.Row>
@@ -125,8 +127,7 @@ class Home extends Component {
                 </Grid>
               </Grid.Column>
             </Grid>
-            <Container>
-              <Grid.Column>
+            <Container style={{margin: "2em"}}>
                 <Header textAlign="center">Autres fonction</Header>
                 <Header as="h3" content="Mode rasta" textAlign="left"/>
                 <Input disabled={this.props.processing} label="Pendant " fluid onChange={ (e) => {this.rastaTime = e.target.value}} placeholder="X secondes" action={
@@ -150,7 +151,6 @@ class Home extends Component {
                     content: 'Executer'
                   }
                 }/>
-              </Grid.Column>
             </Container>
           </Container>
         </div>

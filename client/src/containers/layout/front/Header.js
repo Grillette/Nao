@@ -52,17 +52,17 @@ class HeaderContainer extends Component {
   render() {
     let batteryhtml = null;
     if (this.props.battery > 80) {
-      batteryhtml = (<Icon fitted name="battery full" size="big" color="green"/>);
+      batteryhtml = (<Icon fitted name="battery full" style={{fontSize: "2.5em"}} color="green"/>);
     } else if (this.props.battery > 60) {
-      batteryhtml = (<Icon fitted name="battery high" size="big" color="olive"/>);
+      batteryhtml = (<Icon fitted name="battery high" style={{fontSize: "2.5em"}} color="olive"/>);
     } else if (this.props.battery > 40) {
-      batteryhtml = (<Icon fitted name="battery medium" size="big" color="orange"/>);
+      batteryhtml = (<Icon fitted name="battery medium" style={{fontSize: "2.5em"}} color="orange"/>);
     } else if (this.props.battery > 20) {
-      batteryhtml = (<Icon name="battery low" size="big" color="red"/>);
+      batteryhtml = (<Icon name="battery low" style={{fontSize: "2.5em"}} color="red"/>);
     } else if (this.props.battery > 0) {
-      batteryhtml = (<Icon name="battery empty" size="big" color="red"/>);
+      batteryhtml = (<Icon name="battery empty" style={{fontSize: "2.5em"}} color="red"/>);
     } else {
-      batteryhtml = (<Icon.Group size='big'>
+      batteryhtml = (<Icon.Group style={{fontSize: "2.5em"}}>
         <Icon name='battery empty' />
         <Icon color='red' name='dont'/>
       </Icon.Group>);

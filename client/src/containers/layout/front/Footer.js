@@ -8,7 +8,7 @@ class Footer extends Component {
     return (
       <footer>
         <div style={{textAlign: 'center', margin: 50}}>
-          3il &copy; 2018
+          3iL &copy; 2018
         </div>
       </footer>
     );
