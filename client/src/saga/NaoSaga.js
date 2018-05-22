@@ -40,8 +40,6 @@ import {
   NAO_GET_LHIP_TEMPERATURE,
   NAO_SET_RHIP_TEMPERATURE,
   NAO_GET_RHIP_TEMPERATURE,
-  NAO_GET_RUNNING_BEHAVIORS,
-  NAO_SET_RUNNING_BEHAVIORS,
   NAO_SHUTDOWN,
 
   NOTIFICATION_ADD,
@@ -111,11 +109,6 @@ function * connect(action) {
     // get RHip temperature
     let rHip_temp = yield call(Nao.getRHipTemperature, null);
     yield put ({type: NAO_SET_RHIP_TEMPERATURE, payload: rHip_temp.toString()});
-
-    // get Running behaviors list
-    // let running_behaviors = yield call(Nao.getRunningBehaviors, null);
-    // yield put ({type: NAO_GET_RUNNING_BEHAVIORS, payload: running_behaviors});
-    // console.log("running_behaviors : " + running_behaviors);
 
     let version = yield call(Nao.getSystemVersion, null);
     yield put({type: NAO_SET_SYSTEM_VERSION, payload: version.toString()});
@@ -354,17 +347,6 @@ function * getRHipTemperature() {
   }
 }
 
-function * getRunningBehaviors() {
-  console.log("SALOPE");
-  try{
-    let data = yield call(Nao.getRunningBehaviors, null);
-    if (data.hasOwnProperty('error')) throw new Error(data.error);
-    yield put({type: NAO_SET_RUNNING_BEHAVIORS, payload: data});
-  } catch (e) {
-    yield put({type: NOTIFICATION_ADD, payload: {id: Math.random(), message : e.message, type : 'negative'}});
-  }
-}
-
 function * NaoSaga() {
   yield [
     takeLatest(NAO_CONNECT, connect),
@@ -388,7 +370,6 @@ function * NaoSaga() {
     takeLatest(NAO_GET_RELBOW_TEMPERATURE, getRElbowTemperature),
     takeLatest(NAO_GET_LHIP_TEMPERATURE, getLHipTemperature),
     takeLatest(NAO_GET_RHIP_TEMPERATURE, getRHipTemperature),
-    takeLatest(NAO_GET_RUNNING_BEHAVIORS, getRunningBehaviors),
     takeLatest(NAO_SHUTDOWN, shutdown),
   ];
 }

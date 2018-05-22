@@ -23,7 +23,6 @@ const initialState = {
   commands: {},
   users: {},
   behaviorList: {},
-  runningBehaviors: {},
 };
 
 export default function (state = initialState, action) {
@@ -75,16 +74,6 @@ export default function (state = initialState, action) {
 
     case USER_RESET:
       nextState.users = {};
-      return nextState;
-      break;
-
-    case NAO_GET_RUNNING_BEHAVIORS:
-      nextState.runningBehaviors = action.payload;
-      return nextState;
-      break;
-
-    case NAO_SET_RUNNING_BEHAVIORS:
-      nextState.runningBehaviors = action.payload;
       return nextState;
       break;
 

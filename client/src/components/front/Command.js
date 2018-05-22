@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 
 class Command extends React.Component {
 
+  // Construction du bouton d'une action, cliquable si aucune autre action n'est en cours
   render() {
     return (
       <Button disabled={this.props.processing} style={{margin: 5}} size="massive" onClick={(e) => this.props.onClick(this.props.data.action) }>{this.props.data.name}</Button>
