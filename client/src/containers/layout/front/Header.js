@@ -4,8 +4,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Menu, Icon, Button, Confirm, Header } from 'semantic-ui-react';
 import { Link } from 'react-router';
+import NaoApi from '../../../services/naoClass';
 
 import {BehaviorSetLoading, NaoShutdown, NaoStopAllBehavior} from '../../../actions';
+
+import logo from 'assets/img/header.png';
+
 
 class HeaderContainer extends Component {
 
@@ -63,29 +67,29 @@ class HeaderContainer extends Component {
         <Icon color='red' name='dont'/>
       </Icon.Group>);
     }
-
     return (
       <div>
         <Menu inverted fixed="top" borderless>
-          <Menu.Item header>NAOBOX V2 - PILOTAGE DU ROBOT NAO</Menu.Item>
+          <Menu.Item><img src={logo} title="Knock Knock !" className="header_logo"/></Menu.Item>
+          <Menu.Item><h1 className="header_title">NAOBOX V2</h1></Menu.Item>
           <Menu.Item><div className="batteryPourcent">{this.props.battery}%</div>{batteryhtml}</Menu.Item>
-          <Menu.Item>
-            <Button inverted icon="power" color="red" onClick={this.handleClickShutdown}/>
-            <Confirm
-              content={(<Header as="h3">Voulez vous vraiment éteindre nao ?</Header>)}
-              open={this.state.shutdown}
-              onCancel={this.handleCancel}
-              onConfirm={this.handleConfirm}
-              cancelButton='Non'
-              confirmButton="Oui"
-            />
-          </Menu.Item>
           <Menu.Item>
             <Button icon='window close' labelPosition='right' content="Arrêter l'action" onClick={this.stop} disabled={!this.props.processing} negative={this.props.processing} />
           </Menu.Item>
           <Menu.Menu position='right'>
-            <Menu.Item><Button as={Link} to="admin" inverted icon="wrench"/></Menu.Item>
-            <a href="../assets/Manuel_utilisation.pdf" className="doc" target = "_blank"><Menu.Item><Button inverted icon="book"/></Menu.Item></a>
+            <Menu.Item><Button as={Link} to="admin" inverted icon="wrench" title="Zone administrateur"/></Menu.Item>
+            <a href="../assets/Manuel_utilisation.pdf" className="doc" target = "_blank" title="Manuel d'utilisation"><Menu.Item><Button inverted icon="book"/></Menu.Item></a>
+            <Menu.Item>
+              <Button inverted icon="power" color="red" title="Cliquez pour éteindre le robot" onClick={this.handleClickShutdown}/>
+              <Confirm
+                content={(<Header as="h3">Voulez vous vraiment éteindre nao ?</Header>)}
+                open={this.state.shutdown}
+                onCancel={this.handleCancel}
+                onConfirm={this.handleConfirm}
+                cancelButton='Non'
+                confirmButton="Oui"
+              />
+            </Menu.Item>
           </Menu.Menu>
         </Menu>
       </div>

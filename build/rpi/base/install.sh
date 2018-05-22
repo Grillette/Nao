@@ -18,7 +18,7 @@ if [ $? -eq "0" ]; then
                     software-properties-common \
                     ssh \
                     lsof \
-                    linux-headers-4.9.0-9-all \
+                    linux-headers-4.9.0-6-all \
                     raspberrypi-kernel-headers
 
         echo "### INSTALL REPOSITORY ###"
@@ -37,9 +37,8 @@ if [ $? -eq "0" ]; then
         echo "deb [arch=armhf] https://download.docker.com/linux/debian \
              $(lsb_release -cs) stable" | \
             sudo tee /etc/apt/sources.list.d/docker.list
-        sudo apt-get update && sudo apt-get install -y docker-ce
+        sudo apt-get update && sudo apt-get install -y docker-ce && exit 0
         sudo usermod -aG docker pi
-        sudo newgrp docker
         sudo systemctl enable docker.service
 
 
@@ -47,25 +46,18 @@ if [ $? -eq "0" ]; then
 
         sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf.sav
         sudo cp wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf
-        sudo cp interfaces /etc/network
-        sudo ifup eth0
-        sudo ifup wlan0
         wget -q https://git.io/voEUQ -O /tmp/raspap && bash /tmp/raspap
         sudo cp dnsmasq.conf /etc
         sudo sed -i -e 's/80/4242/g' /etc/lighttpd/lighttpd.conf
+        sudo cp interfaces /etc/network
         sudo cp hostapd.conf /etc
         sudo systemctl enable hostapd.service
         sudo systemctl enable dnsmasq.service
 
 
-        echo "### INSTALL NAOSERVER ###"
-
-        naoserver -i
-
-
         echo "### REBOOTING ###"
 
-        #sudo reboot
+        sudo reboot
 
     else
         echo "You need to have internet access ..."

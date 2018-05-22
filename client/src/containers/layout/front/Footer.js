@@ -6,9 +6,11 @@ import { connect } from 'react-redux';
 class Footer extends Component {
   render() {
     return (
-      <div style={{textAlign: 'center', margin: 50}}>
-        3il &copy; 2017
-      </div>
+      <footer>
+        <div style={{textAlign: 'center', margin: 50}}>
+          3il &copy; 2018
+        </div>
+      </footer>
     );
   }
 }

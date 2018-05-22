@@ -5,12 +5,21 @@
   z-index: 999;
 }
 
+.header_logo {
+  width: 5em !important;
+}
+
+.header_title {
+  font-size: 2em;
+  padding: 0 1em 0 0;
+}
+
 .top {
   z-index: 1;
 }
 
 .padding-top {
-  padding-top: 60px;
+  padding-top: 6em;
 }
 
 .simple-padding {

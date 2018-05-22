@@ -12,7 +12,7 @@ import { NaoMove,NaoSay, NaoRasta, NaoMoveHead } from '../../actions';
 import getRobotDefault from '../../selectors/getRobotDefault';
 
 class Home extends Component {
-  
+
   constructor() {
     super();
     this.move = this.move.bind(this);
@@ -20,21 +20,21 @@ class Home extends Component {
     this.sayValue = '';
     this.rastaTime = 5;
   }
-  
+
   move(x,y,theta) {
     // si il y a rien qui tourne deja !
     if (!this.props.processing) {
       this.props.actions.NaoMove({x, y, theta});
     }
   }
-  
+
   moveHead(mode,x,y) {
     // si il y a rien qui tourne deja !
     if (!this.props.processing) {
       this.props.actions.NaoMoveHead({mode,x,y});
     }
   }
-  
+
   render() {
     return isUndefined(this.props.robot) ? null : (
         <div>
@@ -91,31 +91,6 @@ class Home extends Component {
                 </Grid>
               </Grid.Column>
               <Grid.Column>
-                <Header>Autres fonction</Header>
-                <Header as="h3" content="Mode rasta" textAlign="left"/>
-                <Input disabled={this.props.processing} label="Pendant " fluid onChange={ (e) => {this.rastaTime = e.target.value}} placeholder="X secondes" action={
-                  {
-                    onClick: () => {
-                      if (!this.props.processing && !isEmpty(this.rastaTime) && !isNull(this.rastaTime)) {
-                        this.props.actions.NaoRasta(this.rastaTime);
-                      }
-                    },
-                    content: 'Executer'
-                  }
-                }/>
-                <Header as="h3" content="Mode parlotte" textAlign="left"/>
-                <Input disabled={this.props.processing} label="Faire dire " fluid onChange={ (e) => {this.sayValue = e.target.value}} placeholder="Coucou" action={
-                  {
-                    onClick: () => {
-                      if (!this.props.processing && !isEmpty(this.sayValue) && !isNull(this.sayValue)) {
-                        this.props.actions.NaoSay(this.sayValue);
-                      }
-                    },
-                    content: 'Executer'
-                  }
-                }/>
-              </Grid.Column>
-              <Grid.Column>
                 <Header>Déplacement Tête</Header>
                 <Grid textAlign="center" columns='three' stretched>
                   <Grid.Row>
@@ -150,6 +125,33 @@ class Home extends Component {
                 </Grid>
               </Grid.Column>
             </Grid>
+            <Container>
+              <Grid.Column>
+                <Header textAlign="center">Autres fonction</Header>
+                <Header as="h3" content="Mode rasta" textAlign="left"/>
+                <Input disabled={this.props.processing} label="Pendant " fluid onChange={ (e) => {this.rastaTime = e.target.value}} placeholder="X secondes" action={
+                  {
+                    onClick: () => {
+                      if (!this.props.processing && !isEmpty(this.rastaTime) && !isNull(this.rastaTime)) {
+                        this.props.actions.NaoRasta(this.rastaTime);
+                      }
+                    },
+                    content: 'Executer'
+                  }
+                }/>
+                <Header as="h3" content="Mode parlotte" textAlign="left"/>
+                <Input disabled={this.props.processing} label="Faire dire " fluid onChange={ (e) => {this.sayValue = e.target.value}} placeholder="Coucou" action={
+                  {
+                    onClick: () => {
+                      if (!this.props.processing && !isEmpty(this.sayValue) && !isNull(this.sayValue)) {
+                        this.props.actions.NaoSay(this.sayValue);
+                      }
+                    },
+                    content: 'Executer'
+                  }
+                }/>
+              </Grid.Column>
+            </Container>
           </Container>
         </div>
       );
