@@ -91,8 +91,6 @@ class Home extends Component {
                 </Grid>
               </Grid.Column>
               <Grid.Column>
-              </Grid.Column>
-              <Grid.Column>
                 <Header>Déplacement Tête</Header>
                 <Grid textAlign="center" columns='three' stretched>
                   <Grid.Row>
